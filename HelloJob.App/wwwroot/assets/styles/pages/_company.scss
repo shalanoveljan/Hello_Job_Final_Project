@@ -1,0 +1,185 @@
+
+.dark .company_box p{
+    color: #fff !important;
+}
+
+.dark .company_box span{
+    color: #fff !important;
+}
+.dark .custom-pagination li a{
+    color: #fff !important;
+}
+.dark a.active {
+    color: #2196F3;
+}
+.dark .custom-pagination li a:hover {
+    background: #020a14 !important;
+    color: #2196F3;
+}
+
+
+
+.full {
+    position: relative;
+    width: 100%;
+
+    .new_breadcrumb {
+        height: 60px;
+        background-color: #1f9dff;
+        border-radius: 0;
+        margin-bottom: 10px;
+        margin-top: 5px;
+        font-weight: 300;
+
+        .two_side_breadc {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            h3 {
+                font-size: 20px;
+                font-weight: bold;
+                color: #fff;
+                font-family: 'Samsung Sharp Sans';
+            }
+            ul {
+                display: flex;
+                justify-content: flex-end;
+                margin-left: 3px;
+
+                li {
+                    position: relative;
+                    float: left;
+                    display: flex;
+                    align-items: center;
+                    margin-right: 15px;
+                    a {
+                        color: #fff !important; 
+                        font-size: 16px;
+                        line-height: 18px;
+                    }
+
+                    &:after {
+                        position: relative;
+                        float: right;
+                        content: '/';
+                        margin-left: 15px;
+                        font-size: 16px;
+                        color: #fff;
+                    }
+                }
+            }
+        }
+
+
+    }
+
+    .breadc {
+        display: flex;
+        align-items: center;
+    }
+
+    .companies_section {
+        margin-top: -10px;
+        margin-bottom: 5px;
+        padding-top: 36px !important;
+
+        .company_card {
+            height: 160px;
+            transition: .3s ease;
+            margin-bottom: 20px;
+            .company_box {
+                transition: .3s ease;
+                height: 100%;
+
+                &:hover{
+                    box-shadow: 0px 5px 25px 0px rgba(0, 0, 0, 0.1);
+                }
+
+                a {
+                    width: 100%;
+                    height: 160px;
+                    padding: 30px 10px;
+                    border-radius: 6px;
+                    display: flex;
+                    flex-direction: column;
+                    border: 1px solid #EDEDED;
+                    align-items: center;
+                    transition: .3s ease;
+
+                    .n_company_images {
+                        width: 100%;    
+                        height: 40px;
+                        position: relative;
+                        padding: 0 15px;
+                        img {
+                            position: relative;
+                            float: left;
+                            width: 100%;
+                            height: 100%;
+                            object-fit: contain;
+                            transition: .3s ease;
+                        }
+                    }
+
+                    p {
+                        font-family: 'Samsung Sharp Sans';
+                        font-size: 16px;
+                        color: #212944;
+                        font-weight: 500;
+                        margin-top: 15px;
+                        margin-bottom: 10px;
+                        text-align: center;
+                    }
+
+                    span {
+                        font-size: 14px;
+                        color: #212944;
+                    }
+                }
+            }
+        }
+    }
+
+    .custom-pagination {
+        font-family: "Inter";
+        display: flex;
+        width: max-content;
+        position: relative;
+        li{
+            margin: 0;
+            a.active {
+                background: #F4F6F9;
+                color: #2196F3;
+            }
+            a {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 6px;
+                font-weight: 500;
+                font-size: 14px;
+                line-height: 20px;
+                color: #212944;
+                width: 40px;
+                height: 40px;
+
+
+            }
+        }
+
+        .rotate-pagination-item {
+            transform: rotate(180deg);
+        }
+
+        img {
+            filter: brightness(0) saturate(100%) invert(12%) sepia(10%) saturate(3873%) hue-rotate(189deg) brightness(90%) contrast(87%);
+        }
+    }
+
+    .custom-pagination li a:hover {
+        background: #F4F6F9;
+        color: #2196F3;
+    }
+}
+

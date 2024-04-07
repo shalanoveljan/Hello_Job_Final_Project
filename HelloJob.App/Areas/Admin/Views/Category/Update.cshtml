@@ -1,0 +1,60 @@
+﻿@model CategoryGetDto
+<div class="main-panel">
+    <div class="content-wrapper">
+        <div class="row">
+            <div class="col-md-12 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Category form</h4>
+                        <p class="card-description">
+                            Category Create Form
+                        </p>
+                        <form enctype="multipart/form-data" method="post" class="forms-sample">
+                            <div class="alert alert-danger" asp-validation-summary="ModelOnly"></div>
+
+                            <div class="form-group">
+                                <label asp-for="Name">Name</label>
+                                <input asp-for="Name" type="text" class="form-control" id="exampleInputUsername1" placeholder="Name">
+                                <span class="text text-danger" asp-validation-for="Name"></span>
+                            </div>
+                            <div class="form-group">
+                                <div class="form-group">
+                                    <label for="exampleInputConfirmPassword1">Categories</label>
+                                    <select asp-for="ParentId" class="js-example-basic-single w-100 select2-hidden-accessible" tabindex="-1" aria-hidden="true">
+                                        <option value="" selected>Categories</option>
+
+                                        @foreach (var item in ViewBag.Categories.Datas)
+                                        {
+                                            if (item.ParentId == null)
+                                            {
+                                                <option value="@item.Id">@item.Name</option>
+                                            }
+                                        }
+                                    </select>
+                                    <span class="text text-danger" asp-validation-for="ParentId"></span>
+
+                                </div>
+                            </div>
+
+                            
+                                <div class="form-group">
+                                    <label>File upload</label>
+                                       <div class="form-group">
+                                <input type="file" accept="image/*" name="ImageFile" class="form-control">
+                                <br />
+                                <img style="height:150px" src="~/assets/images/categories/@Model.Image" />
+                            </div>
+                                </div>
+                            
+
+
+                                
+                            <button type="submit" class="btn btn-primary mr-2">Submit</button>
+                            <button class="btn btn-light">Cancel</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

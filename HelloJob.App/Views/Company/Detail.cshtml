@@ -1,0 +1,181 @@
+﻿  
+ 
+@model CompanyGetDto
+
+@inject IVacancyService vacancyService;
+
+@{
+    List<VacancyGetDto> vacancies = (await vacancyService.GetAllForVacancyPageInWebSiteAsync()).Data;
+}
+@inject ICategoryService categoryService;
+
+@{
+    List<CategoryGetDto> categories = (await categoryService.GetAllAsync()).Datas.ToList();
+}
+
+<!-- Main start  -->
+<main class="main full" role="main">
+    <div class="header-link">
+        <div class="container">
+            <ul>
+                <li><a asp-controller="Home" asp-action="index">İş elanları</a></li>
+                <li><a asp-controller="Resume" asp-action="index">CV - lər</a></li>
+                <li><a asp-controller="Course" asp-action="index">Kurslar</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="breadcrumbs-block">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item color"><a href="#">Esas sehife</a></li>
+                    <li class="breadcrumb-item color"><a href="#">Sirketler</a></li>
+                    <li class="breadcrumb-item color" aria-current="page"><a href="#">@Model.Name</a></li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+    <section class="company">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="company__head">
+                        <div class="company__head__top" style="background-image: url(https://www.hellojob.az/uploads/company/full/2023/11/27/645221892a0bf-8-o5Yd8tXg084UM.jpeg)">
+                            <div class="company__head__logo">
+                                <img loading="lazy" src="~/assets/images/companies/@Model.Image" alt="">
+                            </div>
+                        </div>
+                        <div class="company__head__bottom">
+                            <h2 class="company__head__name">@Model.Name</h2>
+                            <nav class="company__head__nav">
+                                <ul>
+                                    <li><a href="#" class="tab__link active" data-tab="1">Vakansiyalar</a></li>
+                                    <li><a href="#" class="tab__link " data-tab="2">Şirkət haqqında</a></li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                    <div class="tab__item active" data-tab="1">
+                        <h2 class="section-title">Kapital Bank iş elanları</h2>
+                        <div class="resumes my-0">
+                            <div class="vacancies">
+                                @foreach (var item in @vacancies.Where(x => x.Company.Id == Model.Id))
+                                {
+                                <a asp-controller="Home" asp-action="Detail" asp-route-id="@Model.Id" class="vacancies__item company-vacancy-item">
+                                    <div class="vacancies__item__left">
+                                        <div class="vacancies__icon">
+                                                <img loading="lazy" src="~/assets/images/categories/@categories.FirstOrDefault(x=>x.Id==@item.Category.ParentId).Image" alt="Telesatış bölməsində kiçik mütəxəssis">
+                                        </div>
+                                        <div class="vacancies__desc">
+                                            <h3>@item.Category.Name</h3>
+                                            <p>@item.Company.Name</p>
+                                                <span class="com_card_date">@item.EndDate.ToString("dd MMM yyyy")</span>
+                                        </div>
+                                    </div>
+                                    <div class="vacancies__item__right">
+                                        <span class="card_like " data-section="works" data-id="16429">
+                                            <i id="unliked_ico" class="fa-regular fa-heart"></i>
+                                            <i id="liked_ico" class="fa-solid fa-heart" style="
+        display: none;color: #2196F3;top: 18px;
+    "></i>
+                                        </span>
+                                    </div>
+                                </a>
+                                }
+                            </div>
+                        </div>
+                        <h2 class="section-title pt-4">
+                            Vaxtı bitmiş vakansiyalar
+                        </h2>
+                        <div class="resumes my-0">
+                            <div class="vacancies">
+                                @foreach (var item in vacancies.Where(x => x.EndDate <= DateTime.Now && x.Company.Id == Model.Id))
+                                {
+                                <a asp-controller="Home" asp-action="Detail" asp-route-id="@item.Id" class="vacancies__item company-vacancy-item">
+                                    <div class="vacancies__item__left">
+                                        <div class="vacancies__icon">
+                                                <img loading="lazy" src="~/assets/images/categories/@categories.FirstOrDefault(x=>x.Id==@item.Category.ParentId).Image" alt="Şəmkir filialı üzrə Mikrokreditlər bölməsinin kiçik mütəxəssisi">
+                                        </div>
+                                        <div class="vacancies__desc">
+                                            <h3>@item.Category.Name</h3>
+                                                <p>@item.Company.Name</p>
+                                                <span class="com_card_date">@item.EndDate.ToString("dd MMM yyyy")</span>
+                                        </div>
+                                    </div>
+                                    <div class="vacancies__item__right">
+                                        <span class="card_like" data-section="works" data-id="16106">
+                                            <i id="unliked_ico" class="fa-regular fa-heart"></i>
+                                            <i id="liked_ico" class="fa-solid fa-heart" style="
+        display: none; color: #2196F3;top: 18px;
+    "></i>
+                                        </span>
+                                    </div>
+                                </a>
+                                    
+                                }
+                            </div>
+                        </div>
+                </div>
+                    <div class="tab__item " data-tab="2">
+                        <h2 class="section-title">şirkət haqqında</h2>
+                        <div class="content">
+                            <p>
+                                 @Model.About
+                            </p>
+                        </div>
+                    </div>
+            </div>
+                <div class="col-lg-4">
+                    <div class="resume__block--contact inner_fixed_bottom">
+                        <div class="contact">
+                            <div class="contact__head">
+                                <h4>Kontakt məlumatları</h4>
+                                <a href="#" class="company__contact__icon contact-btn mr-0 d-md-none">
+                                    <img loading="lazy" src="https://www.hellojob.az/content/assets/images/resume/svg-icons/arrow-bottom.svg" alt="">
+                                </a>
+                            </div>
+                            <div class="contact__body">
+                                <div class="contact__top">
+                                    <h4>Kontakt məlumatları</h4>
+                                    <div class="resume__item">
+                                        <div class="resume__icon">
+                                            <img loading="lazy" src="https://www.hellojob.az/content/assets/images/resume/svg-icons/mail.svg" alt="">
+                                        </div>
+                                        <div class="resume__item__text">
+                                            <h4 class="hidd_email">E-poçtu göstər</h4>
+                                            <h4 class="hidd_email d-none"></h4>
+                                            <p>@Model.Email</p>
+                                        </div>
+                                        <button class="resume__icon hidden_toggle hidden_toggle-email mr-0">
+                                        </button>
+                                    </div>
+                                    <div class="resume__item mb-0">
+                                        <div class="resume__icon">
+                                            <img loading="lazy" src="https://www.hellojob.az/content/assets/images/company/globe.svg" alt="">
+                                        </div>
+                                        <div class="resume__item__text">
+                                            <h4><a href="@Model.WebsiteUrlLink" target="_blank">https://kapitalbank.az</a></h4>
+                                            <p>Veb səhifəsi</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+        </div>
+        <div class="blog_inner_tags"></div>
+    </section>
+    <script type="text/javascript">
+        $('.contact-btn').click(function (e) {
+            e.preventDefault();
+            $(this).toggleClass('open')
+            $('.contact__body').slideToggle();
+        })
+    </script>
+</main>
+<!-- Main end  -->
+@section Scripts {
+    <script src="~/assets/js/company-detail.js"></script>
+   }

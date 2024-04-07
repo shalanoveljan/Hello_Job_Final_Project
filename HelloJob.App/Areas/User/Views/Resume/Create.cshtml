@@ -1,0 +1,471 @@
+﻿
+
+@model ResumePostDto
+<div class="create_cv">
+    <div class="title">
+        <h1>CV Yerləşdir</h1>
+        <ul class="profile__add-cv__parts">
+            <li class="active">
+                <a href="#tab1" class="tab1 step_btn"> Şəxsi məlumatlar</a>
+            </li>
+        </ul>
+    </div>
+    <div class="inner_tab">
+        <form enctype="multipart/form-data" method="post" asp-controller="resume" asp-action="create">
+            <div class="alert alert-danger" asp-validation-summary="ModelOnly"></div>
+
+            <input type="hidden" id="AppUserId" name="AppUserId" value="@ViewBag.UserId">
+
+            <div class="row mb-5">
+                <div class="col-lg-2">
+                    <h2 class="section_title">Şəxsi məlumatlar</h2>
+                </div>
+                <div class="col-lg-10">
+                    <div class="form-group">
+                        <div class="image_input">
+                            <input class="choose"
+                                   type="file"
+                                   asp-for="ImageFile"
+                                   id="fileInput"
+                                   accept="image/*"
+                                   onchange="showPreview(this)" />
+                        </div>
+                        <label for="prof_img" class="upload_image">
+                            <img src="https://www.hellojob.az/content/assets/images/profile/svg-icons/upload2.svg" alt="" />
+                            <span>Şəkil əlavə et</span>
+                            <p>SVG, PNG, JPG or GIF (max. 1000x1000px)</p>
+                        </label>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="cv_inputs">
+                                <label for="">Ad</label>
+                                <input type="text"
+                                       asp-for="Name"
+                                       class="form-control inputs"
+                                       placeholder="Adınız" />
+                                <span class="text text-danger" asp-validation-for="Name"></span>
+
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="cv_inputs">
+                                <label for="">Soyad</label>
+                                <input type="text"
+                                       asp-for="Surname"
+                                       class="form-control inputs"
+                                       placeholder="Soyad" />
+                                <span class="text text-danger" asp-validation-for="Surname"></span>
+
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="cv_inputs">
+                                <label for="">Doğum Tarixi</label>
+                                <input type="date"
+                                       asp-for="Birthday"
+                                       class="form-control inputs"
+                                       placeholder="__/__/____" />
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="cv_inputs">
+                                <label for="">Son tarix </label>
+                                <input type="date"
+                                       asp-for="EndDate"
+                                       class="form-control inputs"
+                                       placeholder="__/__/____" />
+                                <span class="text text-danger" asp-validation-for="EndDate"></span>
+
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="cv_inputs">
+                                <label for="">E-Poçt</label>
+                                <input type="email"
+                                       asp-for="Email"
+                                       class="form-control inputs"
+                                       placeholder="E-poçt ünvanınızı yazın" />
+                                <span class="text text-danger" asp-validation-for="Email"></span>
+
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="cv_inputs">
+                                <label>Mobil nömrəniz</label>
+                                <div class="position-relative">
+                                    <input id="phone"
+                                           inputmode="tel"
+                                           type="text"
+                                           asp-for="PhoneNumber"
+                                           placeholder="Mobil nömrənizi qeyd edin"
+                                           class="form-control inputs"
+                                           im-insert="true"
+                                           style="padding-left: 60px" />
+                                    <span class="text text-danger" asp-validation-for="PhoneNumber"></span>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="cv_inputs">
+                                <label for="">Şəhər</label>
+                                <select asp-for="CityId" id="" class="form-control cities">
+                                    @foreach (var item in ViewBag.Cities.Datas)
+                                    {
+                                    <option value="@item.Id">@item.Name</option>
+                                    }
+                                </select>
+                                    <span class="text text-danger" asp-validation-for="CityId"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-5">
+                <div class="col-lg-2">
+                    <h2 class="section_title">İş məlumatlar</h2>
+                </div>
+                <div class="col-lg-10">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="cv_inputs">
+                                <label for="">Kateqoriya</label>
+                                <select asp-for="CategoryId" class="form-control cities">
+                                    @foreach (var category in ((IEnumerable<CategoryGetDto>)ViewBag.Categories.Datas).Where(c => c.ParentId == null))
+                                    {
+                                        <optgroup label="@category.Name">
+                                            @foreach (var subCategory in ((IEnumerable<CategoryGetDto>)ViewBag.Categories.Datas).Where(c => c.ParentId == category.Id))
+                                            {
+                                                <option value="@subCategory.Id">@subCategory.Name</option>
+                                            }
+                                        </optgroup>
+                                    }
+                                </select>
+
+
+
+                                <span class="text text-danger" asp-validation-for="CategoryId"></span>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="cv_inputs">
+                                <label for="">İş stajı</label>
+                                    <input asp-for="Experience" type="number" class="form-control" id="exampleInputEmail1" placeholder="Experience">
+                                    <span class="text text-danger" asp-validation-for="Experience"></span>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="cv_inputs">
+                                <label for="">Təhsil</label>
+                                <select asp-for="EducationId" class="form-control cities">
+                                    <option value="" selected disabled>Təhsilinizi seçin</option>
+                                        @foreach (var item in ViewBag.Educations.Datas)
+                                        {
+                                        <option value="@item.Id">@item.Name</option>
+                                        }
+                                    </select>
+                                    <span class="text text-danger" asp-validation-for="EducationId"></span>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="cv_inputs">
+                                <label for="">Dil bilikleri</label>
+                                <select asp-for="LanguageId" class="form-control cities">
+                                    <option value="" selected disabled>Bildiyiniz Dili seçin</option>
+                                    @foreach (var item in ViewBag.Languages.Datas)
+                                    {
+                                        <option value="@item.Id">@item.Name</option>
+                                    }
+                                </select>
+                                <span class="text text-danger" asp-validation-for="LanguageId"></span>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="cv_inputs">
+                                <label for="">İş saatı</label>
+                                <select asp-for="Mode" class="form-control cities">
+                                     @foreach (var mode in Enum.GetValues(typeof(JobMode)))
+                                {
+                                    if ((int)mode != 0) 
+                                    {
+                                        <option value="@mode">@mode</option>
+                                    }
+                                }
+                                </select>
+                                <span asp-validation-for="Mode" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="cv_inputs">
+                                <label for="">Gender</label>
+                                <select asp-for="Gender" class="form-control cities">
+                                    @foreach (var mode in Enum.GetValues(typeof(Gender)))
+                                    {
+                                        if ((int)mode != 0)
+                                        {
+                                            <option value="@mode">@mode</option>
+                                        }
+                                    }
+                                </select>
+                                <span asp-validation-for="Gender" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="cv_inputs">
+                                <label for="">Marital Status</label>
+                                <select asp-for="Status" class="form-control cities">
+                                    @foreach (var mode in Enum.GetValues(typeof(MaritalStatus)))
+                                    {
+                                        if ((int)mode != 0)
+                                        {
+                                            <option value="@mode">@mode</option>
+                                        }
+                                    }
+                                </select>
+                                <span asp-validation-for="Status" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="cv_inputs">
+                                <label for="">Minimum əmək haqqı AZN</label>
+                                <input type="number"
+                                       max="12000"
+                                       asp-for="Salary"
+                                       class="form-control inputs"
+                                       placeholder="Məs:1500" />
+                                <span class="text text-danger" asp-validation-for="Salary"></span>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="cv_inputs">
+                                <label for="">Sürücülük vəsiqəsi</label>
+                                <div class="checkbox">
+                                    <input asp-for="IsDriverLicense" type="checkbox" class="form-check-input mt-0">
+                                    <span>Var</span>
+                                    <span class="text text-danger" asp-validation-for="IsDriverLicense"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="cv_inputs">
+                                <label for="">Premium</label>
+                                <div class="checkbox">
+                                    <input asp-for="IsPremium" type="checkbox" class="form-check-input mt-0">
+                                    <span>Premium</span>
+                                    <span class="text text-danger" asp-validation-for="IsPremium"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                           <div class="col-lg-12">
+                            <div class="cv_inputs">
+                                <div method="post" class="form-group-2" id="form-container">
+                                       <div style="width:100%">
+                                    <label style="margin-bottom:20px" class="form-label-title">Skills</label>
+                                    <input style="margin-top:5px;  width:100%;" class="form-control key " type="text" placeholder="Skill" asp-for="SkillNames">
+                                        <span asp-validation-for="SkillNames"></span>
+                                        <button style="font-size:20px;padding:5px 10px;margin-right:5px;margin-top:8px;"  type="button" class="add-btn1 btn-primary">+</button>
+                                        <button style="font-size:20px;padding:5px 10px;margin-right:5px;margin-top:8px;" type="button" class="remove-btn1 btn-primary">-</button>
+                                    </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="cv_inputs">
+                                <div method="post" class="form-group-1" id="form-container2">
+                                    <div style="width:100%">
+                                    <label style="margin-bottom:20px" class="form-label-title">Educations</label>
+                                        <input style="margin-top:5px;  width:100%;" class="form-control key " type="text" placeholder="Universitet" asp-for="Univerties">
+                                        <span asp-validation-for="Univerties"></span>
+                                        <input style="margin-top:5px ;  width:100%;" class="form-control value" type="text" placeholder="Degree" asp-for="Degrees">
+                                        <span asp-validation-for="Degrees"></span>
+                                         <input style="margin-top:5px; width:100%;" class="form-control value" type="date" placeholder="Startdate" asp-for="EducationStartDates">
+                                        <span asp-validation-for="EducationStartDates"></span>
+                                        <input style="margin-top:5px" class="form-control value" type="date" placeholder="Enddate" asp-for="EducationEndDates">
+                                        <span asp-validation-for="EducationEndDates"></span>
+                                            <button style="font-size:20px;padding:5px 10px;margin-right:5px;margin-top:8px;" type="button" class="add-btn btn-primary">+</button>
+                                            <button style="font-size:20px;padding:5px 10px;margin-right:5px;margin-top:8px;" type="button" class="remove-btn btn-primary">-</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="cv_inputs">
+                                    <div method="post" class="form-group-3" id="form-container3">
+                                    <div style="width:100%">
+                                        <label style="margin-bottom:20px" class="form-label-title">Experiences</label>
+                                        <input style="margin-top:5px;  width:100%;" class="form-control key" type="text" placeholder="workplace" asp-for="Workplaces">
+                                        <span asp-validation-for="Workplaces"></span>
+                                        <input style="margin-top:5px ;  width:100%;" class="form-control value" type="text" placeholder="positions" asp-for="Positions">
+                                        <span asp-validation-for="Positions"></span>
+                                        <input style="margin-top:5px; width:100%;" class="form-control value" type="date" placeholder="startdate" asp-for="ExperienceStartDates">
+                                        <span asp-validation-for="ExperienceStartDates"></span>
+                                        <input style="margin-top:5px" class="form-control value" type="date" placeholder="enddate" asp-for="ExperienceEndDates">
+                                        <span asp-validation-for="ExperienceEndDates"></span>
+                                        <button style="font-size:20px;padding:5px 10px;margin-right:5px; margin-top:8px;" type="button" class="add-btn2 btn-primary">+</button>
+                                        <button style="font-size:20px;padding:5px 10px;margin-right:5px;margin-top:8px;" type="button" class="remove-btn2 btn-primary">-</button>
+                                   </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="submit-button">
+                <button class="btn btn-primary submit">Təsdiq et</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/HelloJobPanel/assets/js/pageCv.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const formContainer = document.getElementById('form-container2');
+
+            // Function to add new form group
+            function addFormGroup() {
+                const formGroup = document.createElement('div');
+                formGroup.classList.add('form-group-1');
+                formGroup.innerHTML = `
+                                         <div style="width:100%">
+                                        <input style="margin-top:5px;  width:100%;" class="form-control key " type="text" placeholder="Universitet" asp-for="Univerties">
+                                        <span asp-validation-for="Univerties"></span>
+                                        <input style="margin-top:5px ;  width:100%;" class="form-control value" type="text" placeholder="Degree" asp-for="Degrees">
+                                        <span asp-validation-for="Degrees"></span>
+                                         <input style="margin-top:5px; width:100%;" class="form-control value" type="text" placeholder="StartDate" asp-for="EducationStartDates">
+                                        <span asp-validation-for="EducationStartDates"></span>
+                                        <input style="margin-top:5px" class="form-control value" type="text" placeholder="Enddate" asp-for="EducationEndDates">
+                                        <span asp-validation-for="EducationEndDates"></span>
+                                        <button style="font-size:20px;padding:5px 10px;margin-right:5px" type="button" class="add-btn btn-primary">+</button>
+                                        <button style="font-size:20px;padding:5px 10px;margin-right:5px" type="button" class="remove-btn btn-primary">-</button>
+                                    </div>
+                        `;
+                formContainer.appendChild(formGroup);
+
+                // Attach event listeners to the buttons in the new form group
+                const addBtns = document.querySelectorAll('.add-btn');
+                const removeBtns = document.querySelectorAll('.remove-btn');
+                addBtns.forEach(btn => btn.addEventListener('click', addFormGroup));
+                removeBtns.forEach(btn => btn.addEventListener('click', removeFormGroup));
+            }
+            // Function to remove form group
+            function removeFormGroup(event) {
+                const formGroup = event.target.closest('.form-group-1');
+                if (formGroup !== null && formContainer.children.length > 1) {
+                    formContainer.removeChild(formGroup);
+                }
+            }
+
+            // Attach event listener to the button in the initial form group
+            const addBtn = document.querySelector('.add-btn');
+            addBtn.addEventListener('click', addFormGroup);
+            const removeBtn = document.querySelector('.remove-btn');
+            removeBtn.addEventListener('click', removeFormGroup);
+        });</script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const formContainer = document.getElementById('form-container');
+
+            // Function to add new form group
+            function addFormGroup() {
+                const formGroup1 = document.createElement('div');
+                formGroup1.classList.add('form-group-2');
+                formGroup1.innerHTML = `
+                                     <div style="width:100%">
+                                            <input style="margin-top:5px;  width:100%;" class="form-control key " type="text" placeholder="Skill" asp-for="SkillNames">
+                                                <span asp-validation-for="SkillNames"></span>
+                                                <button style="font-size:20px;padding:5px 10px;margin-right:5px"  type="button" class="add-btn1 btn-primary">+</button>
+                                                <button style="font-size:20px;padding:5px 10px;margin-right:5px" type="button" class="remove-btn1 btn-primary">-</button>
+                                            </div>
+                                        `;
+                formContainer.appendChild(formGroup1);
+
+                // Attach event listeners to the buttons in the new form group
+                const addBtns = document.querySelectorAll('.add-btn1');
+                const removeBtns = document.querySelectorAll('.remove-btn1');
+                addBtns.forEach(btn => btn.addEventListener('click', addFormGroup));
+                removeBtns.forEach(btn => btn.addEventListener('click', removeFormGroup));
+            }
+            // Function to remove form group
+            function removeFormGroup(event) {
+                const formGroup = event.target.closest('.form-group-2');
+                if (formGroup !== null && formContainer.children.length > 1) {
+                    formContainer.removeChild(formGroup);
+                }
+            }
+
+            // Attach event listener to the button in the initial form group
+            const addBtn = document.querySelector('.add-btn1');
+            addBtn.addEventListener('click', addFormGroup);
+            const removeBtn = document.querySelector('.remove-btn1');
+            removeBtn.addEventListener('click', removeFormGroup);
+        });</script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const formContainer = document.getElementById('form-container3');
+
+            // Function to add new form group
+            function addFormGroup() {
+                const formGroup3 = document.createElement('div');
+                formGroup3.classList.add('form-group-3');
+                formGroup3.innerHTML = `
+                                                        <div style="width:100%">
+                                                <input style="margin-top:5px;  width:100%;" class="form-control key" type="text" placeholder="workplace" asp-for="Workplaces">
+                                                <span asp-validation-for="Workplaces"></span>
+                                                <input style="margin-top:5px ;  width:100%;" class="form-control value" type="text" placeholder="positions" asp-for="Positions">
+                                                <span asp-validation-for="Positions"></span>
+                                                <input style="margin-top:5px; width:100%;" class="form-control value" type="text" placeholder="startdate" asp-for="ExperienceStartDates">
+                                                <span asp-validation-for="ExperienceStartDates"></span>
+                                                <input style="margin-top:5px" class="form-control value" type="text" placeholder="enddate" asp-for="ExperienceEndDates">
+                                                <span asp-validation-for="ExperienceEndDates"></span>
+                                                <button style="font-size:20px;padding:5px 10px;margin-right:5px" type="button" class="add-btn2 btn-primary">+</button>
+                                                <button style="font-size:20px;padding:5px 10px;margin-right:5px" type="button" class="remove-btn2 btn-primary">-</button>
+                                           </div>
+                                `;
+                formContainer.appendChild(formGroup3);
+
+                // Attach event listeners to the buttons in the new form group
+                const addBtns = document.querySelectorAll('.add-btn2');
+                const removeBtns = document.querySelectorAll('.remove-btn2');
+                addBtns.forEach(btn => btn.addEventListener('click', addFormGroup));
+                removeBtns.forEach(btn => btn.addEventListener('click', removeFormGroup));
+            }
+            // Function to remove form group
+            function removeFormGroup(event) {
+                const formGroup = event.target.closest('.form-group-3');
+                if (formGroup !== null && formContainer.children.length > 1) {
+                    formContainer.removeChild(formGroup);
+                }
+            }
+            // Attach event listener to the button in the initial form group
+            const addBtn = document.querySelector('.add-btn2');
+            addBtn.addEventListener('click', addFormGroup);
+            const removeBtn = document.querySelector('.remove-btn2');
+            removeBtn.addEventListener('click', removeFormGroup);
+        });</script>
+
+    <script>
+        function showPreview(input) {
+            const file = input.files[0];
+            const profileImg = document.getElementById('profile_img');
+
+            if (file && file.type.startsWith('image/')) {
+                const reader = new FileReader();
+
+                reader.onload = function (e) {
+                    profileImg.src = e.target.result;
+                    profileImg.style.opacity = '1';
+                }
+
+                reader.readAsDataURL(file);
+            } else {
+                profileImg.src = '';
+                profileImg.style.opacity = '0';
+            }
+
+        }
+    </script>
+
+}

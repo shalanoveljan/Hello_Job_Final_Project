@@ -1,0 +1,77 @@
+﻿
+@model BlogDetailVM
+
+<main>
+
+    <div class="col-md-12 breadc new_breadcrumb">
+        <div class="container two_side_breadc">
+            <a href="#" class="breadc_single_link">Bloqlar</a>
+            <ul>
+                <li>
+                    <a href="/">Ana səhifə</a>
+                </li>
+                <li>
+                    <a asp-controller="Blog" asp-action="Index">Bloq</a>
+                </li>
+                <li>
+                    <a asp-controller="Blog"  asp-action="Detail" asp-route-id="@Model.result.Id">@Model.result.Title</a>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="col-md-12 blog p-0">
+            <div class="row">
+                <div class="bi_desc col-md-12 full">
+                    <h2>
+                        @Model.result.Title
+                    </h2>
+                    <div class="bi_time_and_counter full">
+                        <span class="b_time">@Model.result.CreatedAt.ToString("dd MMMM  yyyy")</span>
+                        <span class="b_visible"><i></i>@Model.result.ViewCount</span>
+                    </div>
+                    <p class="image-blog">
+                    <img loading="lazy" src="~/assets/images/blogs/@Model.result.Image">
+                    </p>
+                    <p><span style="color:#000000">@Model.result.Description</span></p>
+                </div>
+                <div class="blog_inner_tags col-md-12 full">
+                    <ul class="tag-collections">
+                    </ul>
+                </div>
+                <section class="blogs">
+                    <div class="container">
+                        <h2 class="section-title">Oxsar Bloglar</h2>
+                        <div class="row blog-items">
+
+                            @foreach (var item in Model.blogs.Where(b => b.CategoryId == Model.result.CategoryId && b.Id !=Model.result.Id ).Take(6))
+                            {
+                                  <div class="col-md-4">
+                <a asp-controller="Blog" asp-action="Detail" asp-route-id="@item.Id" class="blogs__item">
+                <div class="blogs__img"> <img loading="lazy" src="~/assets/images/blogs/@item.Image" alt="">
+                </div>
+                <div class="blogs__desc">
+                 <span class="blogs__date">@item.CreatedAt.ToString("dd MMMM  yyyy")</span>
+                <h3>
+                <p>@item.Title</p>
+                <img loading="lazy" src="https://www.hellojob.az/content/assets/images/vacancies/arrow-up.svg" alt="">
+                </h3>
+                </div>
+                </a>
+                </div>
+                            }
+
+                         
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+        </div>
+    </div>
+</main>
+@section Scripts {
+    <script src="~/assets/js/blog-detail.js"></script>
+   }

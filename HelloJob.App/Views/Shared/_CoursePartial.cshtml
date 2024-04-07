@@ -1,0 +1,83 @@
+﻿
+@model List<CourseGetDto>
+@{
+    var premiumItems = Model.Where(item => item.IsPremium).ToList();
+    var nonPremiumItems = Model.Where(item => !item.IsPremium).ToList();
+    bool checkSort = false;
+    if (ViewBag.Dto != null)
+    {
+        checkSort = ViewBag.Dto.IsSort;
+    }
+}
+<input type="text" value="@Model.Count" id="courseCount" hidden/>
+@foreach (var item in checkSort ? Model : premiumItems.Concat(nonPremiumItems))
+{
+    <a asp-action="Detail" asp-route-id="@item.Id" class="resume__block w-100 full" target="_blank">
+        <div class="resume__header">
+            <div class="resume__header__img">
+                <img loading="lazy" src="~/assets/images/courses/@item.Image" alt="">  @* Image xeta ola biler*@
+            </div>
+            <div class="d-flex justify-content-between w-100 align-items-center">
+                <div class="d-block">
+                    <div class="resume__header__desc">
+                        <h3 class="resume__header__name">
+                            @item.Title
+                            <span class="resume__premium resume__premium--scholarship">
+                                <img loading="lazy" src="https://www.hellojob.az/content/assets/images/courses/magic.svg" alt="Ödənişsizdir">
+                                @if (item.Price is 0)
+                                {
+                                    <p>Ödənişsizdir</p>
+                                }
+
+                                else
+                                {
+                                    <p>Ödənişlidir</p>
+                                }
+                            </span>
+
+                        </h3>
+                        <p class="resume__header__speciality">@item.Agency</p>
+                    </div>
+                    <div class="resume__footer">
+                        <div class="resume__item">
+                            <div class="resume__icon">
+                                <img loading="lazy" src="https://www.hellojob.az/content/assets/images/resume/svg-icons/user-clock.svg" alt="">
+                            </div>
+                            <div class="resume__item__text">
+                                <h4>@item.Mode</h4>
+                                <p>Dərs rejimi</p>
+                            </div>
+                        </div>
+
+
+                        <div class="resume__item">
+                            <div class="resume__icon">
+                                <img loading="lazy" src="https://www.hellojob.az/content/assets/images/resume/svg-icons/money.svg" alt="">
+                            </div>
+                            <div class="resume__item__text">
+                                @if (item.Price is 0)
+                                {
+                                    <h4>Ödənişsizdir</h4>
+                                }
+                                else
+                                {
+                                    <h4>Ödənişlididir</h4>
+                                }
+                                <p>Qiymət</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <span class="resume__icon mr-0 course_like " data-id="31">
+                    <i id="unlike" style="color: #2196f3;" class="fa-regular fa-heart"></i>
+                </span>
+            </div>
+        </div>
+
+
+
+    </a>
+}
+
+

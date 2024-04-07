@@ -1,0 +1,159 @@
+﻿@using HelloJob.Entities.Enums;
+
+@model CoursePostDto
+<div class="main-panel">
+    <div class="content-wrapper">
+        <div class="row">
+            <div class="col-md-12 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Default form</h4>
+                        <p class="card-description">
+                            Course Create Form
+                        </p>
+                        <form enctype="multipart/form-data" method="post" class="forms-sample">
+                            <div class="alert alert-danger" asp-validation-summary="ModelOnly"></div>
+
+                            <div class="form-group">
+                                <label asp-for="Title">Title</label>
+                                <input asp-for="Title" type="text" class="form-control" id="exampleInputUsername1" placeholder="Title">
+                                <span class="text text-danger" asp-validation-for="Title"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Description" for="exampleInputPassword1">Description</label>
+                                <input asp-for="Description" type="text" class="form-control" id="exampleInputPassword1" placeholder="Description">
+                                <span class="text text-danger" asp-validation-for="Description"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for ="Agency">Agency</label>
+                                <input asp-for="Agency" type="text" class="form-control" id="exampleInputEmail1" placeholder="Agency">
+                                <span class="text text-danger" asp-validation-for="Agency"></span>
+                            </div>
+                              <div class="form-group">
+                                <label asp-for="maxAge">maxAge</label>
+                                <input asp-for="maxAge" type="number" class="form-control" id="exampleInputEmail1" placeholder="maxAge">
+                                <span class="text text-danger" asp-validation-for="maxAge"></span>
+                            </div>
+                              <div class="form-group">
+                                <label asp-for="minAge">minAge</label>
+                                <input asp-for="minAge" type="number" class="form-control" id="exampleInputEmail1" placeholder="minAge">
+                                <span class="text text-danger" asp-validation-for="minAge"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Price">Price</label>
+                                <input asp-for="Price" type="number" class="form-control" id="exampleInputEmail1" placeholder="Price">
+                                <span class="text text-danger" asp-validation-for="Price"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Period">Period</label>
+                                <input asp-for="Period" type="number" class="form-control" id="exampleInputEmail1" placeholder="Period">
+                                <span class="text text-danger" asp-validation-for="Period"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="Mode" class="control-label">Mode</label>
+                                <select asp-for="Mode" class="form-control">
+                                    <option value="">Select Mode</option>
+                                    @foreach (var modeValue in Enum.GetValues(typeof(LessonMode)))
+                                    {
+                                        if ((int)modeValue != 0)
+                                        {
+                                        <option value="@modeValue">@modeValue</option>
+                                        }
+                                    }
+                                </select>
+                                <span asp-validation-for="Mode" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Level" class="control-label">Level</label>
+                               <select asp-for="Level" class="form-control">
+                                <option value="">Select Level</option>
+                                @foreach (var LevelValue in Enum.GetValues(typeof(Level)))
+                                {
+                                    if ((int)LevelValue != 0) 
+                                    {
+                                        <option value="@LevelValue">@LevelValue</option>
+                                    }
+                                }
+                            </select>
+                                <span asp-validation-for="Level" class="text-danger"></span>
+                            </div>
+                             <div class="form-group d-flex justify-content-between">
+                                <div class="form-check form-check-success">
+                                    <label asp-for="IsPremium" class="form-check-label">
+                                        <input asp-for="IsPremium" type="checkbox" class="form-check-input" checked="">
+                                        IsPremium
+                                        <i class="input-helper"></i>
+                                        <span class="text text-danger" asp-validation-for="IsPremium"></span>
+                                    </label>
+                                </div>
+                                 <div class="form-check form-check-success">
+                                    <label asp-for="IsRetirement" class="form-check-label">
+                                        <input asp-for="IsRetirement" type="checkbox" class="form-check-input" checked="">
+                                        IsRetirement
+                                        <i class="input-helper"></i>
+                                        <span class="text text-danger" asp-validation-for="IsRetirement"></span>
+                                    </label>
+                                </div>
+                                <div class="form-check form-check-success">
+                                    <label asp-for="IsSertificate" class="form-check-label">
+                                        <input asp-for="IsSertificate" type="checkbox" class="form-check-input" checked="">
+                                        IsSertificate
+                                        <i class="input-helper"></i>
+                                        <span class="text text-danger" asp-validation-for="IsSertificate"></span>
+                                    </label>
+                                </div>
+
+                            </div>
+                           
+
+                            <div class="form-group">
+                                <div class="form-group">
+                                <label >Tags</label>
+                                    <select asp-for="TagsIds" class="js-example-basic-single w-100 select2-hidden-accessible" tabindex="-1" aria-hidden="true">
+
+                                        @foreach (var item in ViewBag.Tags.Datas)
+                                        {
+                                                <option value="@item.Id">@item.Name</option>
+                                            
+                                        }
+                                    </select>
+                                    <span class="text text-danger" asp-validation-for="TagsIds"></span>
+
+                                </div>  
+                            </div>
+
+                            <div class="form-group">
+                                <div class="form-group">
+                                    <label for="exampleInputConfirmPassword1">ParentCategories</label>
+                                    <select asp-for="CategoryId" class="js-example-basic-single w-100 select2-hidden-accessible" tabindex="-1" aria-hidden="true">
+                                        <option value="0" selected>Categories</option>
+
+                                        @foreach (var item in ViewBag.Categories.Datas)
+                                        {
+                                            if (item.ParentId == null)
+                                            {
+                                                <option value="@item.Id">@item.Name</option>
+                                            }
+                                        }
+                                    </select>
+                                    <span class="text text-danger" asp-validation-for="CategoryId"></span>
+
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>File upload</label>
+                                  <input type="file" accept="image/*" asp-for="ImageFile" class="form-control">
+                                <span class="text text-danger" asp-validation-for="ImageFile"></span>
+                            </div>
+                         
+                            <button type="submit" class="btn btn-primary mr-2">Submit</button>
+                            <button class="btn btn-light">Cancel</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

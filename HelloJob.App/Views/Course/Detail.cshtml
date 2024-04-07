@@ -1,0 +1,153 @@
+﻿
+@model CourseGetDto 
+<main>
+
+    <div class="nsp_course mb-3">
+        <div class="container">
+            <div class="row ">
+
+                <div class="nsp_top col-md-12">
+                    <ul>
+                        <li>
+                            <a href="/">İş elanları</a>
+                        </li>
+                        <li>
+                            <a asp-action="Index" asp-controller="resume">CV-lər</a>
+                        </li>
+                        <li class="active">
+                            <a asp-action="index" asp-controller="course">Kurslar</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="breadcrumb-section">
+        <div class="container">
+            <ul>
+                <li><a href="">Ana səhifə / </a></li>
+                <li style="margin-left: 5px"><a href="">Kurslar / </a></li>
+                <li style="margin-left: 5px">
+                    <a href="">@Model.Title</a>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <section class="kursinfo-section">
+        <div class="container kursinfocon">
+            <div class="kursinfo-left">
+                <div class="kursown carts">
+                    <div class="kursownleft">
+                        <div class="imgbox"><img src="~/assets/images/courses/@Model.Image" alt=""></div>
+                        <div class="kursownleft-info">
+                            <h3>@Model.Title</h3>
+                            <p>@Model.Agency</p>
+                        </div>
+                    </div>
+                    <div class="kursownright">
+                        @if (Model.IsPremium)
+                        {
+                            <a href="" class="premiumbox">
+                                <img src="~/assets/icons/crown.svg" alt="">
+                                    <p>Premium</p>
+                            </a>
+                            
+                        }
+                       
+                        <span class="resume__icon mr-0 course_like mt-2 " data-id="31">
+                            <i id="unlike" style="color: #2196f3;" class="fa-regular fa-heart"></i>
+                        </span>
+                    </div>
+                </div>
+                <div class="kursinfo carts">
+                    <div class="kursinfo-upper">
+                        <div class="cartinfotarget"></div>
+                        <h3 class="cartinfoheadings">KURS MƏLUMATLARI</h3>
+                    </div>
+                    <div class="kursinfo-below">
+                        <div class="kursinfocart">
+                            <div class="imgbox"> <img src="https://www.hellojob.az/content/assets/images/resume/svg-icons/user-clock.svg" alt=""> </div>
+                            <div class="kursinfocart-info">
+                                <h5>@Model.Mode</h5>
+                                <p>Dərs rejimi</p>
+                            </div>
+                        </div>
+                        <div class="kursinfocart">
+                            <div class="imgbox"> <img src="https://www.hellojob.az/content/assets/images/resume/svg-icons/user-clock.svg" alt=""> </div>
+                            <div class="kursinfocart-info">
+                                @if (Model.Price is 0)
+                                {
+                                    <h5>Ödənişsizdir</h5>
+                                }
+                                else
+                                {
+                                    <h5>Price: @Model.Price $</h5>
+                                }
+                                <p>Qiymət</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="belongkurs carts">
+                    <div class="belongkurs-upper">
+                        <div class="cartinfotarget"></div>
+                        <h3 class="cartinfoheadings">KURS BARƏDƏ ƏTRAFLI</h3>
+                    </div>
+                    <strong>Dövlət Məşğulluq Agentliyi tərəfindən təşkil olunan peşə hazırlığı kurslarında iştirak edərək gələcəyinizi aşağıdakı sahələrdən birində qura bilərsiniz.</strong>
+                    <strong>@Model.Title</strong>
+                    <strong>@Model.Description</strong>
+                    <ul>
+                        <li>Yaş tələbi: @Model.minAge-@Model.maxAge</li>
+                        <li>Təhsil: @Model.Level təhsil</li>
+                    </ul>
+                </div>
+                <div class="learnings carts">
+                    <div class="learnings-upper">
+                        <div class="cartinfotarget"></div>
+                        <h3 class="cartinfoheadings">ÖYRƏNƏCƏKLƏRİNİZ</h3>
+                    </div>
+                    <div class="learnings-below">
+                                @foreach (var item in Model.Tags)
+                                {
+                                 <a class="learnings-cart">@item.Name </a>
+                                }
+                    </div>
+                </div>
+            </div>
+            <div class="kursinfo-right">
+                <div class="contact">
+                    <button>
+                        <a style="color: white;" href="https://dma.gov.az/pese-hazirligi">
+                            <img src="~/assets/icons/telegram.svg" alt="" /> Müraciət et
+                        </a>
+                    </button>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="scrollsection">
+        <div class="scrollsectioncon">
+            <button>Müraciət et</button>
+            <span class="resume__icon__responsive mr-0 course-detail-like" data-id="31">
+                <i id="unlike" style="color: #2196f3;" class="fa-regular fa-heart"></i>
+            </span>
+            <div class="scrollsectioninfo">
+                <div class="action">
+                    <span style="background-color: transparent;" class="resume__icon mr-0 course_like course-detail-like" data-id="31">
+                        <i id="unlike" style="color: #2196f3;" class="fa-regular fa-heart"></i>
+                    </span>
+                    <p>Seçilmişlərə əlavə et</p>
+                </div>
+                <div class="action shared-action"><img src="~/assets/icons/share.svg" alt=""> <p>Paylaş</p> </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+@section Scripts {
+    <script src="~/assets/js/course-detail.js"></script>
+   }

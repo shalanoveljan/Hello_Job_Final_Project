@@ -1,0 +1,175 @@
+.new_breadcrumb {
+    height: 60px;
+    background-color: #1f9dff;
+    border-radius: 0;
+    margin-bottom: 10px;
+    margin-top: 5px;
+    font-weight: 300;
+
+    .new_breadcrumb li:after {
+        color: #fff !important;
+    }
+
+    a {
+        color: #fff !important;
+    }
+
+    .two_side_breadc {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 100%;
+
+        .breadc_single_link {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        ul {
+            display: flex;
+            justify-content: flex-end;
+
+            li {
+                position: relative;
+                float: left;
+                display: flex;
+                align-items: center;
+                margin-right: 15px;
+                &:after {
+                    position: relative;
+                    float: right;
+                    content: '/';
+                    margin-left: 15px;
+                    font-size: 16px;
+                    color: #fff;
+                }
+                a {
+                    font-size: 16px;
+                    line-height: 18px;
+                }
+            }
+        }
+
+
+    }
+}
+
+
+.bi_desc {
+    margin-bottom: 20px;
+    h2 {
+        position: relative;
+        float: left;
+        font-size: 18px;
+        font-weight: bold;
+        line-height: 21px;
+        margin-top: 20px;
+    
+        &:before {
+            position: relative;
+            float: left;
+            height: 21px;
+            width: 4px;
+            background-color: #1f9dff;
+            content: '';
+            border-radius: 6px;
+            margin-right: 14px;
+        }
+    
+      
+    }
+}
+
+
+.bi_desc p {
+    position: relative;
+    float: left;
+    width: 100%;
+    margin-top: 1em !important;
+    font-size: 16px !important;
+    line-height: 30px !important;
+    margin-bottom: -0.46em !important;
+    letter-spacing: -0.005em !important;
+    word-break: break-word !important;
+    color: rgba(41, 41, 41, 1) !important;
+    font-weight: 300 !important;
+    font-style: normal !important;
+}
+
+
+.bi_time_and_counter {
+    display: flex;
+    align-items: center;
+    margin-top: 27px;
+    margin-bottom: 16px;
+    span {
+        font-size: 14px;
+        margin-right: 20px;
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+}
+
+.bi_desc .b_time:before {
+    position: relative;
+    float: left;
+    content: '';
+    width: 16px;
+    height: 16px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-image: url(https://www.hellojob.az/content/assets/css/images/clock.svg);
+    margin-right: 8px;
+}
+.bi_desc p img {
+    position: relative;
+    height: 362px;
+    object-fit: contain;
+    width: 100%;
+}
+
+
+
+.bi_desc .b_time {
+    float: left;
+    clear: both;
+    display: flex;
+    align-items: center;
+}
+.b_visible {
+    display: flex;
+    align-items: center;
+}
+
+.b_visible i {
+    width: 19px;
+    height: 11px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-image: url('https://www.hellojob.az/content/assets/css/images/bv.svg');
+    margin-right: 8px;
+}
+
+.bi_desc p strong {
+    position: relative;
+    width: 100%;
+    margin-bottom: 9px;
+    font-size: 19px;
+    line-height: 29px;
+    font-weight: 600;
+    margin-top: 5px;
+}
+
+@media only screen and (max-width: 560px){
+    .two_side_breadc a{
+        font-size: 12px !important;
+    }
+
+    .two_side_breadc ul{
+        width: 70%;
+    }
+    .bi_desc h2{
+        font-size: 14px;
+    }
+
+}

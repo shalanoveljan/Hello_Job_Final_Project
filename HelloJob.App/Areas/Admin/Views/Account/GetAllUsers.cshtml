@@ -1,0 +1,97 @@
+﻿
+@model PagginatedResponse<AppUser>
+@inject UserManager<AppUser> UserManager
+@inject RoleManager<IdentityRole> RoleManager
+
+@{
+    var allRoles = RoleManager.Roles.Select(r => r.Name).ToList();
+}
+<div class="main-panel">
+    <div class="content-wrapper">
+        <div class="row">
+            <div class="col-lg-12 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">User List</h4>
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Username</th>
+                                        <th>Role</th>
+                                        <th>Change Role</th>
+                                        <th>Operations</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var user in Model.Datas)
+                                    {
+                                        var roles = await UserManager.GetRolesAsync(user);
+                                            <tr>
+                                            <td>@user.UserName</td>
+                                            @foreach (var role in roles)
+                                            {
+                                                <td>@role</td>
+                                            }
+
+                                            <td>
+                                                <form method="post" asp-action="ChangeUserRole" asp-controller="account">
+                                                    <input type="hidden" name="userId" value="@user.Id" />
+                                                    <select name="newRoleId" class="form-control">
+                                                        @foreach (var role in allRoles)
+                                                        {
+                                                            <option value="@role">@role</option>
+                                                        }
+                                                    </select>
+                                                    <button type="submit" class="btn btn-primary">Change Role</button>
+                                                </form>
+                                            </td>
+
+                                                <td>
+                                                @if (user.IsActivate)
+                                                {
+                                                    <form method="post" asp-action="ChangeActivationStatus">
+                                                        <input type="hidden" name="email" value="@user.Email" />
+                                                        <input type="hidden" name="activate" value="false" />
+                                                        <button style="border:none" type="submit" class="badge badge-primary">Block</button>
+                                                    </form>
+                                                }
+                                                else
+                                                {
+                                                    <form method="post" asp-action="ChangeActivationStatus">
+                                                        <input type="hidden" name="email" value="@user.Email" />
+                                                        <input type="hidden" name="activate" value="true" />
+                                                        <button style="border:none" type="submit" class="badge badge-info">Activate</button>
+                                                    </form>
+                                                }
+                                                </td>
+
+
+                                            </tr>
+                                    }
+                                </tbody>
+                            </table>
+
+                            <nav aria-label="Page navigation example">
+                                <ul class="pagination justify-content-center">
+                                    <li class="page-item @(Model.PageNumber == 1 ? "disabled" : null)">
+                                        <a class="page-link" asp-action="Index" asp-route-page="@(Model.PageNumber - 1)" tabindex="-1">Previous</a>
+                                    </li>
+                                    @for (int i = 1; i <= Model.TotalPages; i++)
+                                    {
+                                        <li class="page-item @(i == Model.PageNumber ? "active" : null)">
+                                            <a class="page-link" asp-action="Index" asp-route-page="@i">@i</a>
+                                        </li>
+                                    }
+                                    <li class="page-item @(Model.TotalPages == Model.PageNumber ? "disabled" : null)">
+                                        <a class="page-link" asp-action="Index" asp-route-page="@(Model.PageNumber + 1)">Next</a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

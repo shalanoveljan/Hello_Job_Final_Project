@@ -1,0 +1,264 @@
+﻿
+
+@model List<CourseGetDto>
+
+
+<main>
+    <div class="nsp_course">
+        <div class="container">
+            <div class="row ">
+
+                <div class="nsp_top col-md-12">
+                    <ul>
+                        <li>
+                            <a href="/">İş elanları</a>
+                        </li>
+                        <li>
+                            <a asp-controller="resume" asp-action="index" >CV-lər</a>
+                        </li>
+                        <li class="active">
+                            <a asp-controller="resume" asp-action="index">Kurslar</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <section class="resumes courses">
+        <div class="container">
+            <div class="resumes__head">
+                <div class="w-100 d-none d-md-flex align-items-center justify-content-between">
+                    <h3 class="resumes__title">kurslar</h3>
+                </div>
+                <div class="resumes__head__btns--mobile d-md-none">
+                    <a href="#" class="btn btn-sort">
+                        Sırala
+                        <img loading="lazy" src="https://www.hellojob.az/content/assets/images/sort.svg" alt>
+                    </a>
+                    <a href="#" class="btn btn-filters">
+                        Filtrlə
+                        <img loading="lazy" src="https://www.hellojob.az/content/assets/images/filter.svg" alt>
+                        <span id="filters_count"></span>
+                    </a>
+                </div>
+            </div>
+            <div class="resumes__sort d-md-none">
+                <h4>Sırala</h4>
+                <ul>
+                    <li>
+                        <input onclick="MyFunction()" type="radio" class="d-none sortitem" value="time_asc" name="sort" id="1">
+                        <label for="sort2">Müddətə görə (azdan coxa )</label>
+                    </li>
+                    <li>
+                        <input type="radio" onclick="MyFunction()" class="d-none sortitem" value="time_desc" name="sort" id="2">
+                        <label for="sort3">Müddətə görə (çoxdan aza)</label>
+                    </li>
+                    <li>
+                        <input type="radio" onclick="MyFunction()" class="d-none sortitem" value="level_asc" name="sort" id="3">
+                        <label for="sort4">Səviyyəyə görə (aşağıdan yuxari)</label>
+                    </li>
+                    <li>
+                        <input type="radio" onclick="MyFunction()" class="d-none sortitem" value="level_desc" name="sort" id="4">
+                        <label for="sort5">Səviyyəyə görə (yüksəkden asagi)</label>
+                    </li>
+                </ul>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="resumes__filters" id="resume_filters">
+                        <div class="resumes__filters__head  d-md-none">
+                            <h4>Filterlə</h4>
+                            <a href="#" class="resumes__filters__close">
+                                <img loading="lazy" src="https://www.hellojob.az/content/assets/images/close.svg" alt>
+                            </a>
+                        </div>
+                        <div class="resumes__filters__item resumes__filters__item--profession">
+                            <h3 class="resumes__title">İxtİsas</h3>
+                            <ul class="resumes__filters__profession resumes__filters__checkbox">
+                                @foreach (var item in ViewBag.Categories.Datas)
+                                {
+                                    @if (item.ParentId == null)
+                                    {
+                                    <li>
+                                            <input type="checkbox" value="@item.Id" class="form-control d-none" id="category@(item.Id)"
+                                           name="CategoriesIds">
+                                            <label for="category@(item.Id)">
+                                            @item.Name
+                                    </label>
+                                </li>
+                                        
+                                    }
+                                }
+                               
+                            </ul>
+                        </div>
+                        <div class="resumes__filters__item resumes__filters__item--profession">
+                            <h3 class="resumes__title">Şirkət axtar</h3>
+                            @{
+                                var seenAgencies = new HashSet<string>();
+                            }
+
+                            <ul class="resumes__filters__profession resumes__filters__checkbox">
+                                @foreach (var item in Model)
+                                {
+                                    if (!seenAgencies.Contains(item.Agency))
+                                    {
+                                        seenAgencies.Add(item.Agency);
+                                        <li>
+                                            <input type="checkbox" value="@item.Agency" class="form-control d-none" id="@item.Agency" name="Agencies">
+                                            <label for="@item.Agency">@item.Agency</label>
+                                        </li>
+                                    }
+                                }
+                            </ul>
+
+
+                        </div>
+                        <div class="resumes__filters__item resumes__filters__item--profession">
+                            <h3 class="resumes__title">TəQAÜD İmkanı</h3>
+                            <ul class="resumes__filters__checkbox">
+                                <li>
+                                    <input type="checkbox" value="1" class="form-control d-none" id="retire_1"
+                                           name="IsRetirement">
+                                    <label for="retire_1">Var</label>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="resumes__filters__item resumes__filters__item--profession">
+                            <h3 class="resumes__title">QIYMƏT</h3>
+                            <ul class="resumes__filters__checkbox">
+                                <li>
+                                    <input type="checkbox" value="1" class="form-control d-none" id="paid" name="IsFree">
+                                    <label for="paid">Ödənişsiz kurslar</label>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="resumes__filters__item resumes__filters__item--profession">
+                            <h3 class="resumes__title">Dərs REJİMİ</h3>
+                            <ul class="resumes__filters__checkbox">
+                              
+                                    @foreach (var mode in Enum.GetValues(typeof(LessonMode)))
+                                    {
+                                    if ((int)mode != 0)
+                                    {
+                                    <li>
+                                        <input type="checkbox" value="@((int)mode)" class="form-control d-none" id="@mode"
+                                           name="Selected_Lesson_Mode">
+                                    <label for="@mode">@mode</label>
+                                </li>
+                                        
+                                    }
+                                    }
+                              
+                            </ul>
+                        </div>
+                        <!-- <div class="resumes__filters__item">
+                            <h3 class="resumes__title">Müddət</h3>
+                            <div class="form-group">
+                                <input class="range-input d-none" type="text" id="time" readonly>
+                                <div id="slider-range"></div>
+                                <div class="resumes__filters__interval">
+                                    <span>1 ay</span>
+                                    <span>24 ay</span>
+                                </div>
+                            </div>
+                        </div> -->
+                        <div class="resumes_filters_item   ">
+                            <h3 class="resumes__title">Muddet</h3>
+
+                            <div class="range-container">
+                                <div class="values">
+                                    <span id="range1"> 0</span>
+                                    <span>&dash;</span>
+                                    <span id="range2"> 24 </span>
+                                </div>
+                                <div class="wrapper">
+
+                                    <div class="slider-track"></div>
+                                    <input type="range" name="MinTime" min="0" max="24" value="0" id="slider-1" oninput="slideOne()">
+                                    <input type="range" name="MaxTime" min="0" max="24" value="24" id="slider-2" oninput="slideTwo()">
+                                </div>
+                                <div class="wrapper_info mb-3">
+                                    <span>0 ay</span>
+                                    <span>24 ay</span>
+
+                                </div>
+
+
+                            </div>
+
+
+                        </div>
+                        <div class="resumes__filters__item resumes__filters__item--profession">
+                            <h3 class="resumes__title">SERTİFİKAT</h3>
+                            <ul class="resumes__filters__checkbox">
+                                <li>
+                                    <input type="checkbox" value="1" class="form-control d-none" id="certificate_1"
+                                           name="IsSertificate">
+                                    <label for="certificate_1">Verilir</label>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="resumes__filters__item resumes__filters__item--profession">
+                            <h3 class="resumes__title">SƏVİYYƏ</h3>
+                            <ul class="resumes__filters__checkbox">
+
+                                @foreach (var level in Enum.GetValues(typeof(Level)))
+                                {
+                                    if ((int)level != 0)
+                                    {
+                                    <li>
+                                        <input type="checkbox" value="@((int)level)" class="form-control d-none" id="@level"
+                                           name="Level">
+                                        <label for="@level">@level</label>
+                                    </li>
+                                    
+                                        
+                                    }
+                                }
+                               
+                                
+                            </ul>
+                        </div>
+                        <div class="resumes__filters__btns">
+                            <a href="#" class="btn" id="search_filters">Axtar <span id="count_items"></span></a>
+                            <a href="#" class="btn btn-grey" id="clear_filters">Təmizlə</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    <div class="d-flex align-items-center justify-content-center justify-content-md-between mb-23">
+                        <div class="d-md-flex text-center">
+                            <p class="cv_count">
+                                Axtarışınıza uyğun <span id="count_items_head">@Model.Count()</span> kurs tapıldı
+                            </p>
+                            <a href="#" class="cv_count ml-md-3 text-dark" id="clear_filters2">Filtrləri təmizlə</a>
+                        </div>
+                        <div class="form-group d-none  mb-0 d-md-flex align-items-center">
+                            <label >Sırala</label>
+                            <select name="SortBy" onchange="MyFunction()" id="sort" class="form-control">
+                                <option value="">Seçin</option>
+                                <option value="1" class="sortitem">Müddətə görə (azdan coxa )</option>
+                                <option value="2"  class="sortitem" >Müddətə görə (coxdan aza )</option>
+                                <option value="3"  class="sortitem" >Səviyyəyə görə (yuxaridan asagi)</option>
+                                <option value="4"  class="sortitem" >Səviyyəyə görə (asagidan yuxari)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="similar-resume" id="similar-resume">
+                        @await Html.PartialAsync("_CoursePartial",Model)
+                    </div>
+                    <div class="show_more  d-none "></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+</main>
+@section Scripts {
+    <script src="~/assets/js/course.js"></script>
+    <script src="~/assets/js/CustomCourse.js"></script>
+   }

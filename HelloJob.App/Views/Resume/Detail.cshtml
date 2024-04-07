@@ -1,0 +1,460 @@
+﻿
+@model ResumeGetDto
+@inject ILikedService likedService;
+
+@{
+    WishlistGetDto wishlist = await likedService.GetWishList();
+}
+
+<main>
+    <div class="nsp_course">
+        <div class="container">
+            <div class="row ">
+            
+            <div class="nsp_top col-md-12">
+            <ul>
+            <li >
+            <a href="/">İş elanları</a>
+            </li>
+            <li class="active">
+                  <a asp-action="Index" asp-controller="resume">CV-lər</a>
+            </li>
+            <li >
+                  <a asp-action="index" asp-controller="course">Kurslar</a>
+            </li>
+            </ul>
+            </div>
+             
+        </div>
+        </div> 
+    </div>
+    <div class="container container_header">
+        <ul class="breadcrumbs mb-4">
+        <li>
+        <a href="#">Maliyyə</a>
+        </li>
+        <li>
+        <a href="#">Mühasibat</a>
+        </li>
+        </ul>
+    </div>
+    
+    <section class="resume">
+        <div class="container">
+        <div class="row">
+            <div class="col-md-8"> 
+                <div class="resume__block resume_header">
+                    <div class="info">
+                        <div class="resume_header_img">
+                            <img loading="lazy" src="~/assets/images/resumes/@Model.Image" alt="" class="">
+                        </div>
+                         <div class="resume_header_desc">
+                             <h3>@Model.Category.Name </h3>
+                             <p >@Model.Name @Model.Surname</p>
+                         </div>
+                    </div>
+                        <span class="resume__icon mr-0 course_like" id="likes" data-id="@Model.Id">
+                            @if (wishlist.wishlistItems.Any(x => x.Id == Model.Id && x.IsLiked))
+                            {
+                                <i id="like" style="color: #2196f3;" class="fa-solid fa-heart"></i>
+                            }
+                            else
+                            {
+                                <i id="like" style="color: #2196f3;" class="fa-regular fa-heart"></i>
+                            }
+                        </span>
+                </div>
+                <div class="resume__block">
+                    <h3 class="resume__title">Şəxsİ məlumatlar</h3>
+                    <div class="row">
+                    <div class="col-md-6">
+                    <div class="resume__item">
+                    <div class="resume__icon">
+                    <img loading="lazy" src="https://www.hellojob.az/content/assets/images/resume/svg-icons/birthday-cake.svg" alt="">
+                    </div>
+                    <div class="resume__item__text">
+                    <h4>@Model.Birthday.ToString("dd MMMM yyyy")</h4>
+                    <p>Doğum tarixi</p>
+                    </div>
+                    </div>
+                    </div>
+                    <div class="col-md-6">
+                    <div class="resume__item mb-0">
+                    <div class="resume__icon">
+                    <img loading="lazy" src="https://www.hellojob.az/content/assets/images/resume/svg-icons/pin.svg" alt="">
+                    </div>
+                    <div class="resume__item__text">
+                    <h4>@Model.City.Name</h4>
+                    <p>Şəhər</p>
+                    </div>
+                    </div>
+                    </div>
+                    </div>
+                </div>
+                <div class="resume__block">
+                    <h3 class="resume__title">İş məlumatları</h3>
+                    <div class="row">
+                    <div class="col-md-6">
+                    <div class="resume__item">
+                    <div class="resume__icon">
+                    <img loading="lazy" src="https://www.hellojob.az/content/assets/images/resume/svg-icons/briefcase.svg" alt="">
+                    </div>
+                    <div class="resume__item__text">
+                    <h4>@Model.Mode</h4>
+                    <p>İş rejimi</p>
+                    </div>
+                    </div>
+                    </div>
+                    <div class="col-md-6">
+                    <div class="resume__item">
+                    <div class="resume__icon">
+                    <img loading="lazy" src="https://www.hellojob.az/content/assets/images/resume/svg-icons/briefcase.svg" alt="">
+                    </div>
+                    <div class="resume__item__text">
+                    <h4>@Model.Category.Name</h4>
+                    <p>İşlədiyi sahə</p>
+                    </div>
+                    </div>
+                    </div>
+                    <div class="col-md-6">
+                    <div class="resume__item">
+                    <div class="resume__icon">
+                    <img loading="lazy" src="https://www.hellojob.az/content/assets/images/resume/svg-icons/briefcase.svg" alt="">
+                    </div>
+                    <div class="resume__item__text">
+                    <h4> @Model.Experience il</h4>
+                    <p>İş təcrübəsi</p>
+                    </div>
+                    </div>
+                    </div>
+                    <div class="col-md-6">
+                    <div class="resume__item mb-0">
+                    <div class="resume__icon">
+                    <img loading="lazy" src="https://www.hellojob.az/content/assets/images/resume/svg-icons/money.svg" alt="">
+                    </div>
+                    <div class="resume__item__text">
+                    <h4> @Model.Salary AZN </h4>
+                    <p>Minimum əmək haqqı AZN</p>
+                    </div>
+                    </div>
+                    </div>
+                    <div class="col-md-6">
+                    <div class="resume__item mb-0">
+                    <div class="resume__icon">
+                    <img loading="lazy" src="https://www.hellojob.az/content/assets/images/resume/svg-icons/graduation.svg" alt="">
+                    </div>
+                    <div class="resume__item__text">
+                    <h4>@Model.Education.Name</h4>
+                    <p>Təhsil</p>
+                    </div>
+                    </div>
+                    </div>
+                    </div>
+                </div>
+                    <div class="resume__block">
+                        <h3 class="resume__title">Tecrube</h3>
+                        @foreach (var item in Model.experiences)
+                        {
+                            <div class="resume__item resume__item--full">
+                                <div class="resume__icon">
+                                    <img loading="lazy" src="https://www.hellojob.az/content/assets/images/resume/svg-icons/graduation.svg" alt="">
+                                </div>
+                                <div class="d-block w-100">
+                                    <div class="d-md-flex justify-content-between w-100">
+                                        <div class="resume__item__text">
+                                            <h4>@item.Workplace</h4>
+                                        </div>
+                                        <div class="resume__item__right">
+                                            <span>@item.Position</span>
+                                            <span>@item.StartDate - @(item.EndDate != null ? item.EndDate.ToString() : "hele burda oxuyuram")</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                    <div class="resume__block">
+                        <h3 class="resume__title">Təhsİl</h3>
+                        @foreach (var item in Model.educations)
+                        {
+                            <div class="resume__item resume__item--full">
+                                <div class="resume__icon">
+                                    <img loading="lazy" src="https://www.hellojob.az/content/assets/images/resume/svg-icons/graduation.svg" alt="">
+                                </div>
+                                <div class="d-block w-100">
+                                    <div class="d-md-flex justify-content-between w-100">
+                                        <div class="resume__item__text">
+                                            <h4>@item.University</h4>
+                                        </div>
+                                        <div class="resume__item__right">
+                                            <span>@item.Degree</span>
+                                            <span>@item.StartDate - @(item.EndDate != null ? item.EndDate.ToString() : "hele burda oxuyuram")</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                        </div>
+                        <div class="resume__block">
+                            <h3 class="resume__title">Dil bilikləri</h3>
+                            <div class="row">
+
+                            <div class="col-md-6">
+                            <div class="resume__item resume__item--lang">
+                            <span>@Model.Language.Name.ToString().Substring(0,2).ToUpper()</span>
+                            <div class="resume__item__text">
+                            <h4>@Model.Language.Name dili</h4>
+                            </div>
+                            </div>
+                            </div>
+                            </div>
+                            </div>
+                    <div class="resume__block">
+                        <h3 class="resume__title">bacariqlar</h3>
+                        <div class="row">
+                            @foreach (var item in @Model.Skills)
+                            {
+                                <div class="col-md-6">
+                                    <div class="resume__item resume__item--lang">
+                                        <div class="resume__item__text">
+                                            <h4>@item.Name</h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                          
+                        </div>
+                    </div>
+                            <div class="resume__block">
+                                <h3 class="resume__title">Sürücülük vəsiqəsi</h3>
+                                <div class="resume__item resume__item--full">
+                                <div class="resume__icon">
+                                <img loading="lazy" src="https://www.hellojob.az/content/assets/images/resume/svg-icons/folder.svg" alt="">
+                                </div>
+                                <div class="resume__item__text">
+                                @if (Model.IsDriverLicense)
+                                {
+                                    <p>Lisans var</p>
+                                }
+                                else
+                                {
+                                    <p>Lisans yoxdur</p>
+                                }
+
+                                </div>
+                                </div>
+                            </div>
+            </div>
+            <div class="col-md-4"> 
+                <div class="contact">
+                   
+                    <div class="contact__body">
+                      <div class="contact__top">
+                      <h4>Elan məlumatları</h4>
+                      <div class="contact__top__info">
+                     <div class="resume__item">
+                    <div class="resume__icon">
+                       <img loading="lazy" src="https://www.hellojob.az/content/assets/images/resume/svg-icons/calendar.svg" alt="">
+                    </div>
+                    <div class="resume__item__text">
+                      <h4>@Model.CreatedAt.ToString("dd MMMM")</h4>
+                    <p>Elan tarixi</p>
+                    </div>
+                    </div>
+                    <div class="resume__item">
+                    <div class="resume__icon">
+                    <img loading="lazy" src="https://www.hellojob.az/content/assets/images/resume/svg-icons/calendar.svg" alt="">
+                    </div>
+                    <div class="resume__item__text">
+                    <h4>@Model.EndDate.ToString("dd MMMM")</h4>
+                    <p>Bitmə tarixi</p>
+                    </div>
+                    </div>
+                    <div class="resume__item">
+                    <div class="resume__icon">
+                    <img loading="lazy" src="https://www.hellojob.az/content/assets/images/resume/svg-icons/eye.svg" alt="">
+                    </div>
+                    <div class="resume__item__text">
+                    <h4>@Model.ViewCount</h4>
+                    <p>Baxılıb</p>
+                    </div>
+                    </div>
+                    </div>
+                    <div class="resume__item">
+                    <div class="resume__icon">
+                    <img loading="lazy" src="https://www.hellojob.az/content/assets/images/resume/svg-icons/phone.svg" alt="">
+                    </div>
+                    <div class="resume__item__text">
+                                        @if (User.IsInRole("Owner"))
+                                        {
+                                            <h4 class="hidd_num hidden_toggle-num">@Model.PhoneNumber</h4>
+                                        }
+                                        else
+                                        {
+                                            <h4 class="hidd_num hidden_toggle-num">Nömrəni göstər</h4>
+                                        }
+
+                    <h4 class="hidd_num hidden_toggle-num d-none"><a href="#"></a></h4>
+                    <p>Mobil nömrə</p>
+                    </div>
+                    <button class="resume__icon hidden_toggle hidden_toggle-num mr-0">
+                        <img src="https://www.hellojob.az/content/assets/images/resume/svg-icons/lock.svg" alt="">
+                    </button>
+                    </div>
+                    <div class="resume__item mb-0">
+                    <div class="resume__icon">
+                    <img loading="lazy" src="https://www.hellojob.az/content/assets/images/resume/svg-icons/mail.svg" alt="">
+                    </div>
+                    <div class="resume__item__text">
+                      @if (User.IsInRole("Owner"))
+                                        {
+                                            <h4 class="hidd_num hidden_toggle-num">@Model.Email</h4>
+                                        }
+                                        else
+                                        {
+                                            <h4 class="hidd_num hidden_toggle-num">Email göstər</h4>
+                                        }
+                    <h4 class="hidd_email hidden_toggle-email d-none"><a href="#"></a></h4>
+                    <p>E-poçt ünvanı</p>
+                    </div>
+                    <button class="resume__icon hidden_toggle hidden_toggle-email mr-0">
+                        <img src="https://www.hellojob.az/content/assets/images/resume/svg-icons/lock.svg" alt="">
+                    </button>
+                    </div>
+                    </div>
+                    <div class="contact__bottom">
+                    <h4 class="mb-3">CV</h4>
+                    <div class="resume__item align-items-center mb-0">
+                    <div class="resume__icon">
+                    <img loading="lazy" src="https://www.hellojob.az/content/assets/images/resume/svg-icons/file2.svg" alt="">
+                    </div>
+                    <div class="resume__item__text">
+                    <h4 class="text-gray">sənan-allahverənov-cv.pdf</h4>
+                    </div>
+                    <a href="javascript:void()" id="fileOpen" rel="nofollow">
+                    <div class="resume__icon resume__icon--download mr-0">
+                    <img loading="lazy" src="https://www.hellojob.az/content/assets/images/resume/svg-icons/download.svg" alt="">
+                    </div>
+                    </a>
+                    </div>
+                    </div>
+                    <div class="contact__bottom">
+                    <h4 class="mb-3">Çap et</h4>
+                    <div class="resume__item align-items-center mb-0">
+                    <div class="resume__icon">
+                    <img loading="lazy" src="https://www.hellojob.az/content/assets/images/resume/svg-icons/file2.svg" alt="">
+                    </div>
+                    <div class="resume__item__text">
+                    <h4 class="text-gray">Vebsayt CV</h4>
+                    </div>
+                    <a href="/pdf_generate/14188" rel="nofollow" target="_blank">
+                    <div class="resume__icon resume__icon--download mr-0">
+                    <img loading="lazy" src="https://www.hellojob.az/content/assets/images/resume/svg-icons/download.svg" alt="">
+                    </div>
+                    </a>
+                    </div>
+                    </div>
+                    </div>
+                    </div>
+            </div>
+        </div>
+        </div>
+   </section>
+   <div class="container  cv_parts">
+    <h3 class="resume__title">Oxşar cv-lər</h3>
+    <div class="row">
+            @foreach (var item in ((List<ResumeGetDto>)ViewBag.Resumes.Data).Where(b => b.Category.Id == Model.Category.Id && b.Id != Model.Id).OrderByDescending(x => x.CreatedAt).Take(6))
+            {
+                <div class="col-md-6">
+                    <div class="resume">
+                        <a asp-controller="resume" asp-action="detail" asp-route-id="@item.Id" target="_blank">
+                            <div class="resume_header">
+                                <div class="info">
+                                    <div class="resume_header_img">
+                                        <img loading="lazy" src="~/assets/images/resumes/@item.Image" alt="" class="">
+                                    </div>
+                                    <div class="resume_header_descima">
+                                        <h3>@item.Category.Name</h3>
+                                        <p>@item.Name @item.Surname</p>
+                                    </div>
+                                </div>
+                                <span class="resume__icon mr-0 course_like mt-2 " data-id="31">
+                                    <i id="unlike" style="color: #2196f3;" class="fa-regular fa-heart"></i>
+                                </span>
+                            </div>
+                            <div class="resume_footer">
+                                <div class="resume_item">
+                                    <div class="image">
+                                        <img loading="lazy" src="https://www.hellojob.az/content/assets/images/resume/svg-icons/user-clock.svg" alt="">
+                                    </div>
+                                    <div class="resume_item_text">
+                                        <h4>@item.Mode</h4>
+                                        <p>İş rejimi</p>
+                                    </div>
+                                </div>
+                                <div class="resume_item">
+                                    <div class="image">
+                                        <img loading="lazy" src="https://www.hellojob.az/content/assets/images/resume/svg-icons/money.svg" alt="">
+                                    </div>
+                                    <div class="resume_item_text">
+                                        <h4>@item.Salary</h4>
+                                        <p>Minimum əmək haqqı AZN</p>
+                                    </div>
+                                </div>
+                                <div class="resume_item">
+                                    <div class="image">
+                                        <img loading="lazy" src="https://www.hellojob.az/content/assets/images/resume/svg-icons/briefcase.svg" alt="">
+                                    </div>
+                                    <div class="resume_item_text">
+                                        <h4>@item.Experience</h4>
+                                        <p>İş staji</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            }
+
+        
+    </div>
+    <a asp-controller="resume" asp-action="index" class="view-all">Hamısını göstər</a>
+</main>
+@section Scripts {
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+    var resumeId = "@Model.Id"; 
+
+    //var liked = localStorage.getItem("liked_" + resumeId);
+    //if (liked === "true") {
+    //    localStorage.setItem("liked_" + resumeId, "false");
+    //    document.getElementById("unlike").style.display = "none";
+    //    document.getElementById("like").style.display = "inline";
+    //} else {
+    //    localStorage.setItem("liked_" + resumeId, "true");
+    //    document.getElementById("unlike").style.display = "inline";
+    //    document.getElementById("like").style.display = "none";
+    //}
+
+    function addToFavorites(resumeId) {
+        fetch('/Like/AddToWishlist?itemId=' + resumeId + '&itemType=Resume', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        }).then(response => {
+            return response.json();
+        }).then(data => {
+            console.log(data);
+        }).catch(error => {
+            console.error('Error:', error);
+        });
+    }
+
+    addToFavorites(resumeId);
+});
+
+    </script>
+
+    <script src="~/assets/js/resume-detail.js"></script>
+   }

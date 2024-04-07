@@ -1,0 +1,94 @@
+﻿
+@model PagginatedResponse<BlogGetDto>
+<main>
+
+    <div class="breadcrumbs-new pb-0">
+        <a href="/">Əsas səhifə</a>
+        <span>/</span>
+        <a href="/blog/">Bloqlar</a>
+        </div>
+
+
+      <div class="page-title-center-container">
+            <h2 class="page-title">Bloqlar</h2>
+      </div>
+
+      <div class="section-component">
+        <div class="container">
+            <div class="sc-title-container">
+                <h4 class="sc-title">Son bloq yazıları</h4>
+                </div>
+                <div class="last-blog-cards">
+                   @foreach (var item in Model.Datas.OrderByDescending(x=>x.CreatedAt).Take(3))
+                {
+                    <a asp-controller="Blog" asp-action="Detail" asp-route-id="@item.Id" class="new-blog-item big-blog-item">
+                <div class="nbi-image">
+                <img loading="lazy" src="~/assets/images/blogs/@item.Image">
+                </div>
+                <div class="nbi-information">
+                            <span class="nbi-time">@item.CreatedAt.ToString("dd MMMM  yyyy")</span>
+                <h4 class="nbi-title">
+                @item.Title <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M7 17L17 7M17 7H7M17 7V17" stroke="#101828" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+                </h4>
+                <div class="n-blog-content">
+                @item.smallDescription</div>
+                </div>
+                </a>
+                }
+               @* <a href="/post/hr-mutexessisleri-cv-de-neye-diqqet-yetirirler" class="new-blog-item horizontal-blog-item">
+                <div class="nbi-image">
+                <img loading="lazy" src="https://www.hellojob.az/uploads/blog/min/2023/12/19/65814d3416426-v60yOBnW048Re8_.png">
+                </div>
+                <div class="nbi-information">
+                <span class="nbi-time">19 Dekabr 2023</span>
+                <h4 class="nbi-title">
+                HR mütəxəssisləri CV-də nəyə diqqət yetirirlər? <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M7 17L17 7M17 7H7M17 7V17" stroke="#101828" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+                </h4>
+                <div class="n-blog-content">
+                HR mütəxəssisləri CV-də nəyə diqq ... </div>
+                </div>
+                </a>*@
+                
+                </div>
+        </div>
+        </div>
+
+        <div class="section-component all-blogs-container">
+           <div class="container">
+            <div class="sc-title-container">
+                <h4 class="sc-title">Bütün yazılar</h4>
+                </div>
+                <div class="all-blog-cards">
+                    @foreach (var item in Model.Datas)
+                {
+                    
+                <a asp-controller="Blog" asp-action="Detail" asp-route-id="@item.Id" class="new-blog-item ">
+                <div class="nbi-image">
+                <img loading="lazy" src="~/assets/images/blogs/@item.Image">
+                </div>
+                <div class="nbi-information">
+                            <span class="nbi-time">@item.CreatedAt.ToString("dd MMMM  yyyy")</span>
+                <h4 class="nbi-title">
+                @item.Title <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M7 17L17 7M17 7H7M17 7V17" stroke="#101828" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+                </h4>
+                <div class="n-blog-content">
+                 @item.smallDescription </div>
+                </div>
+                </a>
+                }
+             
+                </div>
+           </div>
+            </div>
+
+
+</main>
+@section Scripts {
+    <script src="~/assets/js/blog.js"></script>
+   }

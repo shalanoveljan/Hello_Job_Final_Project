@@ -1,0 +1,47 @@
+﻿
+@model List<CompanyGetDto>
+@inject IVacancyService vacancyService;
+
+@{
+    List<VacancyGetDto> vacancies = (await vacancyService.GetAllForVacancyPageInWebSiteAsync()).Data;
+}
+
+
+<main class="main full" role="main">
+    <div class="col-md-12 breadc  new_breadcrumb">
+        <div class="container two_side_breadc">
+            <h3>Şirkətlər</h3>
+            <ul>
+                <li>
+                    <a asp-action="index" asp-controller="Home">Əsas səhifə </a>
+                </li>
+                <li>
+                    <a asp-controller="company" asp-action="Index">Şirkətlər</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="container">
+        <div class="col-md-12 companies_section p-0">
+            <div class="row">
+                @foreach (var item in Model)
+                {
+                <div class="company_card col-md-4 col-lg-3">
+                    <div class="company_box">
+                        <a asp-controller="Company" asp-action="detail" asp-route-id="@item.Id" class="full">
+                            <div class="n_company_images">
+                                <img loading="lazy" src="~/assets/images/companies/@item.Image" alt="ABB ASC">
+                            </div>
+                            <p>@item.Name</p>
+                            <span>Vakansiya sayı<span>@vacancies.Where(x=>x.Company.Id==item.Id).Count()</span> </span>
+                        </a>
+                    </div>
+                </div>
+                }
+            </div>
+        </div>
+    </div>
+</main>
+@section Scripts {
+    <script src="~/assets/js/company.js"></script>
+   }

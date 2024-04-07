@@ -1,0 +1,148 @@
+﻿
+@model RequestVM
+
+<main>
+    <section id="exercises" class="mt-5 p-5">
+        <div class="container">
+            <div class="row">
+                
+                <div class="d-flex justify-content-between">
+
+                    <form enctype="multipart/form-data" style="width:100%" asp-controller="request" asp-action="create" method="post">
+                        <input type="text" value="@ViewBag.vacancyId" asp-for="@Model.dto.VacancyId" id="vacancy_id" hidden />
+                        <input type="hidden" id="AppUserId" asp-for="@Model.dto.AppUserId" value="@ViewBag.UserId">
+
+                    <div class="col-md-8">
+                        <div>
+                            <div class="nz p-4">  
+                                <h4>@Model.Vacancy.Position</h4>
+                                <h6>Hellojob.az is elanlari</h6>
+                            </div>
+
+                            <div style="box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;" class="allmur p-2">
+                                <div style="margin-left: 30px;">
+                                    <h5>Müraciət etmək üçün CV seçin</h5>
+                                </div>
+                                @foreach (var item in Model.Resumes)
+                                {
+                                <hr>
+                                <div class="muraciet d-flex justify-content-between">
+                                    <div class="muracietalt d-flex align-items-center">
+                                        <div class="imgbox">
+                                            <img src="~/assets/images/Resumes/@item.Image" alt="">
+                                        </div>
+                                        <div style="margin-left: 20px;">
+                                                <h4>@item.Category.Name</h4>
+                                            <h6>@item.Name @item.Surname</h6>
+                                        </div>
+                                    </div>
+                                    <div class="redacte d-flex justify-content-center align-items-center">
+                                        <div>
+                                                <input value="@item.Id" asp-for="@Model.dto.SelectedResumeId" type="radio">
+                                        </div>
+                                      @*  <div class="redd d-flex align-items-center">
+                                            <i class="fa-regular fa-pen-to-square"></i>
+                                            <h6 style="margin-left: 8px;padding: 5px;">Redacte Et</h6>
+                                        </div>*@
+                                        <div class="imgbox ms-4">
+                                                <a asp-controller="Resume" asp-action="Detail" asp-route-id="@item.Id">
+                                                    <i class="fa-regular fa-eye"></i>
+                                                </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                }
+                            </div>
+
+                            <div>
+                                <button type="submit" class="btn btn-primary mt-5">Müraciət Et</button>
+                                <hr>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    </form>
+
+
+
+
+
+
+                    <div class="col-md-4 mx-2">
+                        <div class="infor ps-4 pt-3" style="border: .1px solid #333;border-radius: 10px;">
+                            <!-- <div class="elan">
+                                <h4>ELAN MƏLUMATLARI</h1>
+                            </div> -->
+
+                        <div class="d-flex">
+                            <div class="">
+                                <li style="background-color: #f4f6f9;padding: 8px;border-radius: 10px;">
+                                        <i style="color: #575d72;" class="fa-solid fa-location-dot"></i>
+                                </li>
+                            </div>
+                            <div>
+                                <p class="mb-0 mx-2">@Model.Vacancy.City.Name</p>
+
+                                <p class="mx-2">Seher</p>
+                            </div>
+                        </div>
+
+                        <div class="d-flex">
+                            <div class="">
+                                <li style="background-color: #f4f6f9;padding: 8px;border-radius: 10px;">
+                                    <i style="color: #575d72;" class="fa-solid fa-road-lock"></i>
+                                </li>
+                            </div>
+                            <div>
+                                <p class="mb-0 mx-2">@Model.Vacancy.Required_Experience il</p>
+
+                                <p class="mx-2">İş staji</p>
+                            </div>
+                        </div>
+
+
+                        <div class="d-flex">
+                            <div class="">
+                                <li style="background-color: #f4f6f9;padding: 8px;border-radius: 10px;">
+                                    <i style="color: #575d72;" class="fa-solid fa-shuffle"></i>
+                                </li>
+                            </div>
+                            <div>
+                                <p class="mb-0 mx-2">@Model.Vacancy.Mode</p>
+
+                                <p class="mx-2">Kateqoriya</p>
+                            </div>
+                        </div>
+
+                        <div class="d-flex">
+                            <div class="">
+                                <li style="background-color: #f4f6f9;padding: 8px;border-radius: 10px;">
+                                    <i style="color: #575d72;" class="fa-brands fa-intercom"></i>
+                                    <!-- <i class="fa-brands fa-intercom"></i> -->
+                                </li>
+                            </div>
+                            <div>
+                                    <p class="mb-0 mx-2">@Model.Categories.FirstOrDefault(x=>Model.Vacancy.Category.ParentId==x.Id).Name</p>
+
+                                <p class="mx-2">Kateqoriya</p>
+                            </div>
+                        </div>
+
+                        </ul>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+        </div>
+        </div>
+        </div>
+    </section>
+
+</main>
+
+
+
+

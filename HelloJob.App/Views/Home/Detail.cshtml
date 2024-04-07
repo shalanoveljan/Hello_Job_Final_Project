@@ -1,0 +1,340 @@
+﻿
+@model VacancyGetDto
+@inject ICategoryService categoryService;
+@inject ILikedService likedService;
+
+@{
+    WishlistGetDto wishlist = await likedService.GetWishList();
+    List<CategoryGetDto> categories = (await categoryService.GetAllAsync()).Datas.ToList();
+}
+<main>
+    <div class="nsp_course">
+        <div class="container">
+            <div class="row ">
+
+                <div class="nsp_top col-md-12">
+                    <ul>
+                        <li>
+                            <a asp-controller="home" asp-action="index">İş elanları</a>
+                        </li>
+                        <li class="active">
+                            <a asp-controller="Resume" asp-action="index">CV-lər</a>
+                        </li>
+                        <li>
+                            <a asp-controller="Course" asp-action="index">Kurslar</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- vacancy detail------------------------------------------ -->
+
+
+    <div class="breadcrumbs-block">
+        <div class="container">
+            <ul class="breadcrumbs">
+                <li>
+                    <a href="/">Ana səhifə</a>
+                </li>
+                <li>
+                    <a href="/is-elanlari/xidmet">@Model.Category.Name</a>
+                </li>
+                <li>
+                    <a href="/is-elanlari/xidmet/operator-74">@Model.Position</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="container  vacancy_detail">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="resume__block resume__header">
+                    <div class="d-flex flex-grow-1">
+                        <div class="resume__header__img">
+                            <img loading="lazy" src="~/assets/images/categories/@categories.FirstOrDefault(x=>x.Id==Model.Category.ParentId).Image" alt="Çağrı mərkəzinin operatoru">
+                        </div>
+                        <div class="resume__header__desc">
+                            <h3 class="resume__header__name">@Model.Position is elani</h3>
+                            <p class="resume__header__speciality">
+                                <a href="/sirket/sirin-su">
+                                    @Model.Company.Name
+                                </a>
+                                iş elanları
+                            </p>
+                        </div>
+                    </div>
+                    <div class="vacancies__item__right mr-4">
+                        <span class="vacancies__price">
+                            @Model.Salary AZN
+                        </span>
+                    </div>
+                    <span class="resume__icon mr-0 course_like" id="likes" data-id="@Model.Id">
+                        @if (wishlist.wishlistVacancies.Any(x => x.Id == Model.Id && x.IsLiked))
+                        {
+                            <i id="like" style="color: #2196f3;" class="fa-solid fa-heart"></i>
+                        }
+                        else
+                        {
+                            <i id="like" style="color: #2196f3;" class="fa-regular fa-heart"></i>
+                        }
+                    </span>
+                </div>
+
+                <div class="resume__block">
+                    <h3 class="resume__title">İş məlumatları</h3>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="resume__item">
+                                <div class="resume__icon">
+                                    <img loading="lazy" src="https://www.hellojob.az/content/assets/images/resume/svg-icons/pin.svg" alt="">
+                                </div>
+                                <div class="resume__item__text">
+                                    <h4>
+                                        <a target="_blank" href="/is-elanlari/seher/baki-1?search_type=filter">@Model.City.Name</a>
+                                    </h4>
+                                    <p>Şəhər</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="resume__item">
+                                <div class="resume__icon">
+                                    <img loading="lazy" src="https://www.hellojob.az/content/assets/images/resume/svg-icons/briefcase.svg" alt="">
+                                </div>
+                                <div class="resume__item__text">
+                                    <h4>minimum @Model.Required_Experience il</h4>
+                                    <p>İş stajı</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="resume__item">
+                                <div class="resume__icon">
+                                    <img loading="lazy" src="https://www.hellojob.az/content/assets/images/resume/svg-icons/money.svg" alt="">
+                                </div>
+                                <div class="resume__item__text">
+                                    <h4>@Model.Salary AZN</h4>
+                                    <p>Əmək haqqı AZN</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="resume__item">
+                                <div class="resume__icon">
+                                    <img loading="lazy" src="https://www.hellojob.az/content/assets/images/resume/svg-icons/user-clock.svg" alt="">
+                                </div>
+                                <div class="resume__item__text">
+                                    <h4>
+                                        <a target="_blank" href="/search?search_type=filter&amp;work_type[]=1">@Model.Mode</a>
+                                    </h4>
+                                    <p>İş rejimi</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="resume__item">
+                                <div class="resume__icon">
+                                    <img loading="lazy" src="https://www.hellojob.az/content/assets/images/resume/svg-icons/briefcase.svg" alt="">
+                                </div>
+                                <div class="resume__item__text">
+                                    <h4><a target="_blank" href="/is-elanlari/xidmet">@categories.FirstOrDefault(x=>x.Id==Model.Category.ParentId).Name</a></h4>
+                                    <p>Sahə</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="resume__item mb-0">
+                                <div class="resume__icon">
+                                    <img loading="lazy" src="https://www.hellojob.az/content/assets/images/resume/svg-icons/chart-tree.svg" alt="">
+                                </div>
+                                <div class="resume__item__text">
+                                    <h4><a target="_blank" href="/is-elanlari/xidmet/operator-74">@Model.Category.Name</a></h4>
+                                    <p>Kateqoriya</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="resume__block  work_info">
+                    <h3 class="resume__title">İş barədə məlumat</h3>
+                    <ul>
+                        @foreach (var item in Model.abouts)
+                        {
+                        <li>@item.Condition</li>
+                        }
+                        </ul>
+
+                    <p>Vakansiyalardan daha tez xəbərdar olmaq üçün <a href="https://bit.ly/hjtopbanner1" target="_blank">Telegram kanalımıza</a> abunə olun!</p>
+                    <hr>
+                    <p>Daha çox <a href="https://bit.ly/isbulink" target="_blank">@Model.Category.Name vakansiyaları</a> isbu.az-da - Axtardığın işbu!</p>
+                </div>
+
+
+
+                <section class="scrollsection">
+                    <div class="scrollsectioncon">
+                        <span class="part1">
+                            @if (User.IsInRole("Employee"))
+                            {
+                            <a asp-controller="Request" asp-action="create" asp-route-vacancyId="@Model.Id" class="btn btn-primary p-2">
+                                Muraciet et
+                                </a>
+                            }
+                            else
+                            {
+                                <a class="btn btn-primary p-2">
+                                    @Model.Company.Email
+                                </a>
+                            }
+
+                            <span class=" mr-0 course-detail-like" data-id="31">
+                                <a href="tel:0554571717" class="btn btn-grey show_number">
+                                    <img loading="lazy" src="https://www.hellojob.az/content/assets/images/resume/svg-icons/phone.svg" alt="">
+                                    <span>Zəng et</span>
+                                </a>
+                            </span>
+
+                        </span>
+
+                        <div class="scrollsectioninfo">
+
+                            <div class="action shared-action"><img src="../assets/icons/share.svg" alt=""> <p>Paylaş</p> </div>
+                        </div>
+                    </div>
+
+                </section>
+                <div class="swiper mySwiper">
+                    <div class="swiper-wrapper">
+                        <a href="#" class="swiper-slide">vakansiya</a>
+                        <a href="#" class="swiper-slide">is elenlari</a>
+                        <a href="#" class="swiper-slide">ish elani</a>
+                        <a href="#" class="swiper-slide">vakansiya</a>
+                        <a href="#" class="swiper-slide">is elani</a>
+                        <a href="#" class="swiper-slide">vakansiya</a>
+                        <a href="#" class="swiper-slide">is elenlari</a>
+                        <a href="#" class="swiper-slide">ish elani</a>
+                        <a href="#" class="swiper-slide">vakansiya</a>
+                        <a href="#" class="swiper-slide">is elani</a>
+                    </div>
+                </div>
+
+
+                <div class="similar__vacancies">
+                    @foreach (var item in ((List<VacancyGetDto>)ViewBag.Vacancys.Data).Where(b => b.Category.Id == Model.Category.Id && b.Id != Model.Id).OrderByDescending(x=>x.CreatedAt).Take(6))
+                    {
+                        <a asp-controller="home" asp-action="detail" asp-route-id="@item.Id" class="vacancies__item vacancies__item_new">
+                            <div class="vacancies__item__left">
+                                <div class="vacancies__icon">
+                                    <img loading="lazy" src="~/assets/images/categories/@categories.FirstOrDefault(x=>x.Id==item.Category.ParentId).Image" alt="Xadime">
+                                </div>
+                                <div class="vacancies__desc">
+                                    <h3>@item.Position</h3>
+                                    <p class="vacancy_item_company">@item.Company.Name</p>
+                                    <div class="vacancy_item_date_count">
+                                        <span class="vacancy_item_time">
+                                            <i class="fa-regular fa-calendar"></i> @item.EndDate.ToString("dd MMM")
+                                        </span>
+                                        <span class="vacancy_item_time"><i class="fa-regular fa-eye"></i> @item.ViewCount</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="vacancies__item__right">
+
+                                <span class="vacancies__price">@item.Salary AZN</span>
+                                <span class="card_like " data-section="works" data-id="16519">
+                                    <i id="unlike" class="fa-regular fa-heart"></i>
+                                </span>
+                            </div>
+                            @if(item.IsPremium){
+                            <span class="vacancies__premium">
+                                <img loading="lazy" src="https://www.hellojob.az/content/assets/images/vacancies/premium.svg" alt="">
+                                <span>Premium</span>
+                            </span>
+                            }
+                        </a>
+
+                    }
+                </div>
+
+            </div>
+
+
+
+
+            <div class="col-md-4 ">
+                <div class="resume__block--contact resume__block--contact__desk">
+                    <div class="contact mb-5">
+                        <div class="contact__body">
+                            <div class="contact__top">
+                                <h4>Elan № @Model.Id</h4>
+                                <div class="resume__item mb-0">
+                                    <div class="resume__icon">
+                                        <img loading="lazy" src="https://www.hellojob.az/content/assets/images/resume/svg-icons/mail.svg" alt="">
+                                    </div>
+                                    <div class="resume__item__text">
+                                        <h4 class="hidd_email email nshow_email" data-tooltip="E-poçt kopyalandı">@Model.Company.Email</h4>
+                                        <p>E-poçt ünvanı</p>
+                                    </div>
+                                    <button class="resume__icon hidden_toggle nshow_email hidden_toggle-email mr-0">
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="contact__bottom">
+                                <div class="row">
+                                    <div class="col-md-6 col-6">
+                                        <div class="resume__item align-items-center ">
+                                            <div class="resume__icon">
+                                                <img loading="lazy" src="https://www.hellojob.az/content/assets/images/resume/svg-icons/calendar.svg" alt="">
+                                            </div>
+                                            <div class="resume__item__text">
+                                                <h4>@Model.CreatedAt.ToString("dd MMMM")</h4>
+                                                <p>Elan tarixi</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-6">
+                                        <div class="resume__item align-items-center ">
+                                            <div class="resume__item__text">
+                                                <h4>@Model.EndDate.ToString("dd MMMM")</h4>
+                                                <p>Bitmə tarixi</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="resume__item align-items-center mb-0">
+                                            <div class="resume__icon">
+                                                <img loading="lazy" src="https://www.hellojob.az/content/assets/images/resume/svg-icons/eye.svg" alt="">
+                                            </div>
+                                            <div class="resume__item__text">
+                                                <h4>@Model.ViewCount</h4>
+                                                <p>Baxılıb</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="contact__btn">
+                                <a href="#premium-popup" class="btn resume__premium-btn popup_btn premiumet" data-effect="mfp-zoom-in">
+                                    <img loading="lazy" src="https://www.hellojob.az/content/assets/images/resume/svg-icons/crown.svg" alt="">
+                                    Elanı Premium et
+                                </a>
+                                <a href="#time-up-popup" class="btn resume__up-btn popup_btn premiumet" data-effect="mfp-zoom-in">
+                                    <img loading="lazy" src="https://www.hellojob.az/content/assets/images/resume/svg-icons/up-arrow.svg" alt="">
+                                    Elanı önə çıxar
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+
+
+
+</main>

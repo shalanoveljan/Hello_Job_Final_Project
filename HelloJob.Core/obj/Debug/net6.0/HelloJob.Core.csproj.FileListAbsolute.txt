@@ -1,0 +1,29 @@
+C:\Users\OMEN\Desktop\VS Code\HelloJob.Core\obj\Debug\net6.0\HelloJob.Core.csproj.AssemblyReference.cache
+C:\Users\OMEN\Desktop\VS Code\HelloJob.Core\obj\Debug\net6.0\HelloJob.Core.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\OMEN\Desktop\VS Code\HelloJob.Core\obj\Debug\net6.0\HelloJob.Core.AssemblyInfoInputs.cache
+C:\Users\OMEN\Desktop\VS Code\HelloJob.Core\obj\Debug\net6.0\HelloJob.Core.AssemblyInfo.cs
+C:\Users\OMEN\Desktop\VS Code\HelloJob.Core\obj\Debug\net6.0\HelloJob.Core.csproj.CoreCompileInputs.cache
+C:\Users\OMEN\Desktop\HelloJobProject\HelloJob.Core\bin\Debug\net6.0\HelloJob.Core.deps.json
+C:\Users\OMEN\Desktop\HelloJobProject\HelloJob.Core\bin\Debug\net6.0\HelloJob.Core.dll
+C:\Users\OMEN\Desktop\HelloJobProject\HelloJob.Core\bin\Debug\net6.0\HelloJob.Core.pdb
+C:\Users\OMEN\Desktop\HelloJobProject\HelloJob.Core\obj\Debug\net6.0\HelloJob.Core.csproj.AssemblyReference.cache
+C:\Users\OMEN\Desktop\HelloJobProject\HelloJob.Core\obj\Debug\net6.0\HelloJob.Core.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\OMEN\Desktop\HelloJobProject\HelloJob.Core\obj\Debug\net6.0\HelloJob.Core.AssemblyInfoInputs.cache
+C:\Users\OMEN\Desktop\HelloJobProject\HelloJob.Core\obj\Debug\net6.0\HelloJob.Core.AssemblyInfo.cs
+C:\Users\OMEN\Desktop\HelloJobProject\HelloJob.Core\obj\Debug\net6.0\HelloJob.Core.csproj.CoreCompileInputs.cache
+C:\Users\OMEN\Desktop\HelloJobProject\HelloJob.Core\obj\Debug\net6.0\HelloJob.Core.dll
+C:\Users\OMEN\Desktop\HelloJobProject\HelloJob.Core\obj\Debug\net6.0\refint\HelloJob.Core.dll
+C:\Users\OMEN\Desktop\HelloJobProject\HelloJob.Core\obj\Debug\net6.0\HelloJob.Core.pdb
+C:\Users\OMEN\Desktop\HelloJobProject\HelloJob.Core\obj\Debug\net6.0\ref\HelloJob.Core.dll
+C:\Users\OMEN\Desktop\HelloJobFullFinalProject-master\HelloJob.Core\bin\Debug\net6.0\HelloJob.Core.deps.json
+C:\Users\OMEN\Desktop\HelloJobFullFinalProject-master\HelloJob.Core\bin\Debug\net6.0\HelloJob.Core.dll
+C:\Users\OMEN\Desktop\HelloJobFullFinalProject-master\HelloJob.Core\bin\Debug\net6.0\HelloJob.Core.pdb
+C:\Users\OMEN\Desktop\HelloJobFullFinalProject-master\HelloJob.Core\obj\Debug\net6.0\HelloJob.Core.csproj.AssemblyReference.cache
+C:\Users\OMEN\Desktop\HelloJobFullFinalProject-master\HelloJob.Core\obj\Debug\net6.0\HelloJob.Core.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\OMEN\Desktop\HelloJobFullFinalProject-master\HelloJob.Core\obj\Debug\net6.0\HelloJob.Core.AssemblyInfoInputs.cache
+C:\Users\OMEN\Desktop\HelloJobFullFinalProject-master\HelloJob.Core\obj\Debug\net6.0\HelloJob.Core.AssemblyInfo.cs
+C:\Users\OMEN\Desktop\HelloJobFullFinalProject-master\HelloJob.Core\obj\Debug\net6.0\HelloJob.Core.csproj.CoreCompileInputs.cache
+C:\Users\OMEN\Desktop\HelloJobFullFinalProject-master\HelloJob.Core\obj\Debug\net6.0\HelloJob.Core.dll
+C:\Users\OMEN\Desktop\HelloJobFullFinalProject-master\HelloJob.Core\obj\Debug\net6.0\refint\HelloJob.Core.dll
+C:\Users\OMEN\Desktop\HelloJobFullFinalProject-master\HelloJob.Core\obj\Debug\net6.0\HelloJob.Core.pdb
+C:\Users\OMEN\Desktop\HelloJobFullFinalProject-master\HelloJob.Core\obj\Debug\net6.0\ref\HelloJob.Core.dll

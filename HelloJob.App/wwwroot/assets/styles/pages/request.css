@@ -1,0 +1,61 @@
+﻿.nz {
+    border: 1px solid #575353;
+    padding: 10px 20px;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+}
+
+.allmur {
+    border: 1px solid #575353;
+    margin-top: 20px;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+}
+
+.muraciet {
+    //   border: 1px solid #575353;
+    padding: 10px 30px;
+
+    .muracietalt {
+        .imgbox img {
+            width: 50px;
+            height: auto;
+            border-radius: 50%;
+            -webkit-border-radius: 50%;
+            -moz-border-radius: 50%;
+            -ms-border-radius: 50%;
+            -o-border-radius: 50%;
+        }
+    }
+}
+
+.redd {
+    margin: 0 18px;
+    background-color: #f4f6f9;
+    border-radius: 10px;
+    padding: 0 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+}
+
+input[type="radio"] {
+    border: 0px;
+    width: 100%;
+    height: 2em;
+}
+
+ul li {
+    list-style-type: none;
+}
+
+.mb-0 {
+    font-weight: 500;
+}

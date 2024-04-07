@@ -1,0 +1,338 @@
+.header-link {
+    padding: 20px 0;
+    background-color: #2196F3;
+    font-family: "Inter" !important;
+
+    ul {
+        display: flex;
+        object-fit: cover;
+
+        li {
+            display: flex;
+
+            &:after{
+                content: "";
+                display: block;
+                margin: 0 16px;
+                width: 1px;
+                height: 100%;
+                background-color: white;
+            }
+
+            a {
+                font-weight: 500;
+                font-size: 16px;
+                line-height: 25px;
+                color: white ;
+            }
+        }
+    }
+}
+
+
+.breadcrumbs-block {
+    margin: 24px 0;
+    font-family: "Inter";
+
+    .color a{
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 20px;
+        color: #A3A6AC;
+    }
+
+
+}
+
+.card_like {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9;
+    cursor: pointer;
+}
+.company {
+    font-family: "Inter" !important;
+    margin-bottom: 50px;
+    .company__head {
+        border-radius: 8px;
+        overflow: hidden;
+        margin-bottom: 24px;
+
+        .company__head__top {
+            background-repeat: no-repeat;
+            background-size: cover;
+            display: flex;
+            align-items: center;
+            padding: 14px;
+            border: 1px solid #F4F6F9;
+            position: relative;
+            min-height: 76px;
+
+            .company__head__logo {
+                width: 112px;
+                height: 112px;
+                border-radius: 50%;
+                border: 5px solid #F4F6F9;
+                min-width: 112px;
+                background-color: white;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin-bottom: -70px;
+                overflow: hidden;
+
+                img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: contain;
+                }
+            }
+        }
+
+        .company__head__bottom {
+            border: 1px solid #F4F6F9;
+            border-top: 0;
+            padding: 20px 16px 0;
+            border-radius: 0 0 8px 8px;
+
+            .company__head__name {
+                font-weight: 700;
+                font-size: 20px;
+                line-height: 25px;
+                margin-left: 120px;
+            }
+
+            .company__head__nav {
+                margin-top: 35px;
+
+                ul {
+                    display: flex;
+                    li {
+                        display: flex;
+                        a.active {
+                            font-weight: 700;
+                            border-color: #2196F3;
+                        }
+
+                        &:after {
+                            content: "";
+                            display: block;
+                            margin: 3px 12px 0;
+                            width: 1px;
+                            height: 17px;
+                            background-color: #F4F6F9;
+                        }
+
+                        a {
+                            font-size: 16px;
+                            line-height: 25px;
+                            color: #212944;
+                            padding-bottom: 16px;
+                            border-bottom: 1px solid transparent;
+                        }
+                    }
+                }
+            }
+
+
+
+
+
+        }
+
+    }
+
+
+    .company .tab__item.active {
+
+        .resumes {
+            font-family: "Inter" !important;
+            color: #212944;
+            margin: 40px 0 80px 0;
+
+            .vacancies {
+                font-family: "Inter";
+                margin-bottom: 26px;
+
+                .company-vacancy-item {
+                    display: flex;
+                    align-items: flex-start;
+                    padding: 24px;
+                    justify-content: space-between;
+                    gap: 32px;
+                    color: #212944;
+                    border: 1px solid #E4E7EC;
+                    border-radius: 6px;
+                    position: relative;
+                    margin-bottom: 26px;
+                    .vacancies__item__right {
+                        display: flex;
+                        flex-direction: column-reverse;
+                        align-items: flex-end;
+                        justify-content: space-between;
+                        font-weight: 500;
+                        font-size: 14px;
+                        line-height: 17px;
+
+                    #liked_ico {
+                        color: #2196F3;
+                        top: 18px;
+                }
+                }
+                }
+
+            
+        }
+    }
+
+    .content {
+        color: #212944;
+        p {
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 22px;
+        }
+    }
+
+}
+}
+
+.vacancies .vacancies__item__left{
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    max-width: 390px;
+    .vacancies__icon {
+        width: 50px;
+        height: auto;
+        min-width: 50px;
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+    .vacancies__desc {
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 19px;
+        h3 {
+            color: #000d4a;
+            font-weight: 500;
+            font-size: 16px;
+            line-height: 24px;
+            margin-bottom: 10px;
+        }
+        .com_card_date {
+            margin-top: 16px;
+            display: block;
+        }
+    }
+}
+
+.resume__block--contact {
+    position: sticky;
+    top: 30px;
+    box-shadow: none;
+    height: auto;
+
+    .contact__head {
+        display: none;
+
+        .company__contact__icon {
+            background: #F4F6F9;
+            border-radius: 8px;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    }
+
+
+    .resume__block--contact .contact__top {
+        border: 1px solid #e2e9f2;
+        border-radius: 8px 8px 0 0;
+        padding: 16px;
+
+        h4:not(.resume__item__text h4) {
+            margin-bottom: 16px;
+        }
+      
+    }
+
+    .resume__item {
+        margin-bottom: 24px;
+        display: flex;
+        align-items: flex-start;
+
+        .resume__icon {
+            width: 40px;
+            height: 40px;
+            background: #F4F6F9;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 16px;
+            min-width: 40px;
+            position: unset;
+        }
+
+        .resume__item__text {
+            flex: 1;
+            h4.hidd_email {
+                cursor: pointer;
+            }
+            h4 {
+                font-weight: 500;
+                font-size: 14px;
+                line-height: 18px;
+                margin-bottom: 4px;
+            }
+            p {
+                font-size: 12px;
+                line-height: 15px;
+            }
+        }
+
+        .resume__icon.hidden_toggle {
+            background-image: url(https://www.hellojob.az/content/assets/images/resume/svg-icons/lock.svg);
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+    }
+
+    
+
+
+}
+
+.inner_fixed_bottom {
+    width: 100%;
+    left: 0;
+    bottom: 0;
+    z-index: 999;
+    background-color: #fff;
+    transition: .4s ease;
+}
+
+.resume__block--contact .contact__top, .resume__block--contact .contact__bottom {
+    border: 1px solid #e2e9f2;
+    border-radius: 8px 8px 0 0;
+    padding: 16px;
+}
+.resume__block--contact .contact__top h4:not(.resume__item__text h4), .resume__block--contact .contact__bottom h4:not(.resume__item__text h4) {
+    margin-bottom: 16px;
+    font-weight: 600
+}
+
+.hidden{
+    display: none;
+}

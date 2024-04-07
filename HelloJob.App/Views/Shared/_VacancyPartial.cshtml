@@ -1,0 +1,46 @@
+﻿
+
+
+@model IList<VacancyGetDto>
+@inject ICategoryService categoryService;
+
+@{
+    List<CategoryGetDto> categories = (await categoryService.GetAllAsync()).Datas.ToList();
+}
+
+@foreach (var item in Model)
+{
+    <a asp-controller="home" asp-action="detail" asp-route-id="@item.Id" class="vacancies__item vacancies__item_new">
+        <div class="vacancies__item__left">
+            <div class="vacancies__icon">
+                <img loading="lazy" src="~/assets/images/categories/@categories.FirstOrDefault(x=>x.Id==item.Category.ParentId).Image" alt="Xadime">
+            </div>
+            <div class="vacancies__desc">
+                <h3>@item.Position</h3>
+                <p class="vacancy_item_company">@item.Company.Name</p>
+                <div class="vacancy_item_date_count">
+                    <span class="vacancy_item_time">
+                        <i class="fa-regular fa-calendar"></i> @item.EndDate.ToString("dd MMM")
+                    </span>
+                    <span class="vacancy_item_time"><i class="fa-regular fa-eye"></i> @item.ViewCount</span>
+                </div>
+            </div>
+        </div>
+        <div class="vacancies__item__right">
+
+            <span class="vacancies__price">@item.Salary AZN</span>
+            <span class="card_like " data-section="works" data-id="16519">
+                <i id="unlike" class="fa-regular fa-heart"></i>
+                <i id="like" class="fa-solid fa-heart"></i>
+            </span>
+        </div>
+        @if (@item.IsPremium)
+        {
+            <span class="vacancies__premium">
+                <img loading="lazy" src="https://www.hellojob.az/content/assets/images/vacancies/premium.svg" alt="">
+                <span>Premium</span>
+            </span>
+        }
+    </a>
+
+}

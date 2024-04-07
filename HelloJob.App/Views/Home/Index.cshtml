@@ -1,0 +1,488 @@
+﻿@model HomeVM
+
+@inject ILikedService likedService;
+
+@{
+    WishlistGetDto wishlist = await likedService.GetWishList();
+}
+
+
+@if (TempData["Verify"] != null)
+{
+    <div id="verify" style="display:none">@TempData["Verify"]</div>
+}
+
+@if (TempData["resetPassword"] != null)
+{
+    <div id="resetpassword" style="display:none">@TempData["resetPassword"]</div>
+}
+@if (TempData["Register"] != null)
+{
+    <div id="register" style="display:none">@TempData["Register"]</div>
+}
+@if (TempData["Request"] != null)
+{
+    <div id="request" style="display:none">@TempData["Request"]</div>
+}
+
+
+<!-- Main Section Start -->
+<main class="main-full full">
+    <div class="new_search_panel full">
+        <div class="nsp_blue"></div>
+        <div class="container">
+            <div class="row pt-3">
+
+                <div class="nsp_top col-md-12">
+                    <ul>
+                        <li class="active">
+                            <a href="/">İş elanları</a>
+                        </li>
+                        <li>
+                            <a asp-controller="resume" asp-action="index">CV-lər</a>
+                        </li>
+                        <li>
+                            <a asp-controller="Course" asp-action="Index">Kurslar</a>
+                        </li>
+                    </ul>
+                </div>
+
+
+                <div class="nsp_bottom col-md-12">
+                    <div class="nsp_searchbar full">
+                        <div class="nsb_searchbar_top">
+                            <form asp-controller="home" asp-action="index" class="full">
+                                <div class="nsp_search_input">
+                                    <img src="~/assets/icons/search.svg" alt="">
+                                    <input type="text" name="searchText" id="searchinput" class="searchinput" value="" placeholder="Məsələn, Dizayner">
+                                    <input type="hidden" name="search_type" value="keyword">
+                                    <input type="hidden" name="searched" value="">
+                                </div>
+                                <button type="submit" class="nsp_search" ><span>Axtar</span></button>
+                            </form>
+                            <div class="nsb_bar_buttons">
+                                <button id="multisearch" class="nsp_filter_open">
+                                    <img src="~/assets/icons/filter.svg" class="pe-3 filterimg" alt="">
+                                    <span class="etrafli">Ətraflı axtarış</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="nsb_searchbar_filter full " style="display: none;">
+                            <button class="nsp_close" type="button">
+                                <i class="fa-solid fa-xmark"></i>
+                            </button>
+                            <form action="/search">
+                                <div class="col-md-12 filter_page_filter main_page_filter_inputs p-0">
+                                    <div class="row">
+                                        <div class="col-lg-4 col-md-6 col-6">
+                                            <div class="form-group">
+                                                <select class="form-select" aria-label="Default select example">
+                                                    <option selected>Open this select menu</option>
+                                                    <option value="1">One</option>
+                                                    <option value="2">Two</option>
+                                                    <option value="3">Three</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-md-6 col-6 mb-4">
+                                            <div class="form-group">
+                                                <select class="form-select" aria-label="Default select example">
+                                                    <option selected>Open this select menu</option>
+                                                    <option value="1">One</option>
+                                                    <option value="2">Two</option>
+                                                    <option value="3">Three</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-4 col-md-6 col-6">
+                                            <div class="form-group">
+                                                <select class="form-select" aria-label="Default select example">
+                                                    <option selected>Open this select menu</option>
+                                                    <option value="1">One</option>
+                                                    <option value="2">Two</option>
+                                                    <option value="3">Three</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-4 col-md-6 col-6 mb-4">
+                                            <div class="form-group">
+                                                <select class="form-select" aria-label="Default select example">
+                                                    <option selected>Open this select menu</option>
+                                                    <option value="1">One</option>
+                                                    <option value="2">Two</option>
+                                                    <option value="3">Three</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-4 col-md-6 col-6">
+                                            <div class="form-group">
+                                                <select class="form-select" aria-label="Default select example">
+                                                    <option selected>Open this select menu</option>
+                                                    <option value="1">One</option>
+                                                    <option value="2">Two</option>
+                                                    <option value="3">Three</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-4 col-md-6 col-6 pb-5">
+                                            <div class="form-group">
+                                                <select class="form-select" aria-label="Default select example">
+                                                    <option selected>Open this select menu</option>
+                                                    <option value="1">One</option>
+                                                    <option value="2">Two</option>
+                                                    <option value="3">Three</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="col-md-7 search_checks">
+                                            <label>
+                                                <input class="checkbox" value="3" type="checkbox">
+                                                <p>Part-time</p>
+                                            </label>
+                                            <label>
+                                                <input class="checkbox" value="1" type="checkbox">
+                                                <p>Full-time</p>
+                                            </label>
+                                            <label>
+                                                <input class="checkbox" value="2" type="checkbox">
+                                                <p>Frilans</p>
+                                            </label>
+                                            <label>
+                                                <input class="checkbox" value="4" type="checkbox">
+                                                <p>Təcrübə</p>
+                                            </label>
+                                            <label>
+                                                <input class="checkbox" value="5" type="checkbox">
+                                                <p>Uzaqdan</p>
+                                            </label>
+                                        </div>
+                                        <div class="col-md-5 search_results">
+                                            <button id="FilterTemizle" type="button">Təmizlə</button>
+                                            <input type="hidden" name="search_type" value="filter">
+                                            <button data-action="search" id="srch-result-count-bar"><i id="search-btn-loader" class="fas fa-spinner fa-pulse d-none mr-5" aria-hidden="true"></i> <b class="result-finded-items-count mr-2">390</b> Elan tapıldı</button>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Category start -->
+    <div class="col-md-12 vacancy_cat_tabs p-0 mt-0">
+
+        <div class="new-categories-section">
+            <div class="container">
+                <div class="new-categories-container">
+                    <div class="col-md-12 section_title-parent">
+                        <div class="row">
+                            <div class="col-md-4 pl-0 sec_tit">
+                                <h4 class="mt-0 section-title">İş elanları 2024</h4>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="new-categories-slider position-relative">
+
+                        @foreach (var item in Model.categories.Datas.Where(x=>x.ParentId==null))
+                        {
+                        <div class="category-card">
+                            <a href="">
+                                        <img src="~/assets/images/categories/@item.Image" alt="">
+
+                                <div class="category-name">
+                                        <p>@item.Name</p>
+                                </div>
+
+                                <div class="category-job-count">
+                                    <p>@Model.vacancies.Datas.Where(x=>x.Category.ParentId==item.Id).Count() is elani</p>
+                                </div>
+                            </a>
+                        </div>
+                        }
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Category end -->
+    <div class="all-companies">
+        <div class="container">
+            <h3 class="section-title">
+                Sirketler
+            </h3>
+            <div class="new-companies">
+
+                @foreach (var item in Model.companies.Datas)
+                {
+                <a asp-action="Detail" asp-controller="Home" asp-route-id="@item.Id" class="vacancies__company">
+                    <img loading="lazy" src="~/assets/images/companies/@item.Image" alt="Kapital Bank" width="30px" class="n_company_images">
+                    <p> @Model.vacancies.Datas.Where(x=>x.Company.Id==item.Id).Count() vakansiya</p>
+                </a>
+                }
+
+
+            </div>
+        </div>
+    </div>
+
+   
+    <!-- Vacancies Start -->
+    <section class="vacancies">
+        <div class="container">
+            <h3 class="section-title">
+                Vakansiyalar
+            </h3>
+
+            <div class="row">
+                <div class="col-md-8">
+                    @foreach (var item in Model.vacancies.Datas)
+                    {
+                    <a asp-controller="home" asp-action="detail" asp-route-id="@item.Id" class="vacancies__item vacancies__item_new">
+                        <div class="vacancies__item__left">
+                            <div class="vacancies__icon">
+                                <img loading="lazy" src="~/assets/images/categories/@Model.categories.Datas.FirstOrDefault(x=>x.Id==item.Category.ParentId).Image" alt="Xadime">
+                            </div>
+                            <div class="vacancies__desc">
+                                <h3>@item.Position</h3>
+                                <p class="vacancy_item_company">@item.Company.Name</p>
+                                <div class="vacancy_item_date_count">
+                                    <span class="vacancy_item_time">
+                                            <i class="fa-regular fa-calendar"></i> @item.EndDate.ToString("dd MMM")
+                                    </span>
+                                    <span class="vacancy_item_time"><i class="fa-regular fa-eye"></i> @item.ViewCount</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="vacancies__item__right">
+
+                            <span class="vacancies__price">@item.Salary AZN</span>
+                           @* <span class="card_like " data-section="works" data-id="16519">
+                                <i id="unlike" class="fa-regular fa-heart"></i>
+                                <i id="like" class="fa-solid fa-heart"></i>
+                            </span>*@
+                                <span class="card_like course_like" id="likes" data-id="@item.Id">
+                                    @if (wishlist.wishlistVacancies.Any(x => x.Id == item.Id && x.IsLiked))
+                                    {
+                                        <i id="like" style="color: #2196f3;" class="fa-solid fa-heart"></i>
+                                    }
+                                    else
+                                    {
+                                        <i id="like" style="color: #2196f3;" class="fa-regular fa-heart"></i>
+                                    }
+                                </span>
+                        </div>
+                        @if(@item.IsPremium){
+                        <span class="vacancies__premium">
+                            <img loading="lazy" src="https://www.hellojob.az/content/assets/images/vacancies/premium.svg" alt="">
+                            <span>Premium</span>
+                        </span>
+                        }
+                    </a>
+                    }
+                    <ul class="custom-pagination">
+                        <li class="page-item @(Model.vacancies.PageNumber==1 ? "disable"  : null )  ">
+                            <a asp-action="Index" asp-route-page="@(Model.vacancies.PageNumber-1)" class="disabled">
+                                <img loading="lazy" src="https://www.hellojob.az/content/assets/images/vacancies/arrow.svg" alt="">
+                            </a>
+                        </li>
+                        @for (int i = 1; i <= Model.vacancies.TotalPages; i++)
+                        {
+                            <li  class="page-item @(Model.vacancies.PageNumber==i ? "disable"  : null )">
+                                <a asp-action="Index" asp-route-page="@i" class="active">@i</a>
+                            </li>
+                        }
+                     
+                        <li class="page-item  @(Model.vacancies.TotalPages==Model.vacancies.PageNumber ? "disable"  : null )  " >
+                            <a asp-action="Index" asp-route-page="@(Model.vacancies.PageNumber+1)">
+                                <img loading="lazy" src="https://www.hellojob.az/content/assets/images/vacancies/arrow.svg" alt="">
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="sticky_element sticky_active_top sticky_active_bottom">
+                        <div class="sticky_element__banner">
+                            <a href="https://urlgeni.us/linkedin/bgbnnr" target="_blank" data-id="22" class="vacancies__banner vacancies__banner--main click_banner">
+                                <img loading="lazy" src="https://www.hellojob.az/uploads/banners/2023/11/14/kapital-sag-banner-november-banner-65536c3930f8c-642f99826c18629c88e81e0d334a240365536c3930f9e-xfF83drfxG8MnB_.jpg" width="370px" height="370px" alt="kapital sag banner - november">
+                            </a>
+                        </div>
+                        <div class="sticky_element__companies comps">
+                            @foreach (var item in Model.companies.Datas)
+                            {
+                                <a asp-action="Detail" asp-controller="Company" asp-route-id="@item.Id" class="vacancies__company">
+                                    <img loading="lazy" src="~/assets/images/companies/@item.Image" alt="@item.Name" width="30px" class="n_company_images">
+                                    <p> @Model.vacancies.Datas.Where(x=>x.Company.Id==item.Id).Count() vakansiya</p>
+                                </a>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Vacancies end -->
+    <!-- Blogs Start -->
+
+    <section class="blogs">
+        <div class="container">
+            <h2 class="section-title">Bloq yazıları</h2>
+            <div class="row">
+                @foreach (var item in Model.blogs.Datas.OrderByDescending(x => x.CreatedAt).Take(3))
+                {
+                    <div class="col-md-4">
+                        <a asp-action="Detail" asp-controller="Blog" asp-route-id="@item.Id" class="blogs__item">
+                            <div class="blogs__img">
+                                <img loading="lazy" src="~/assets/images/blogs/@item.Image" alt="">
+                            </div>
+                            <div class="blogs__desc">
+                                <span class="blogs__date">@item.CreatedAt.ToString("dd MMMM yyyy")</span>
+                                <h3>
+                                    <p>@item.Title</p>
+                                    <img loading="lazy" src="https://www.hellojob.az/content/assets/images/vacancies/arrow-up.svg" alt="">
+                                </h3>
+                            </div>
+                        </a>
+                    </div>
+                }
+            </div>
+        </div>
+    </section>
+    <!-- Blogs end -->
+    <!-- Tags start -->
+
+    <section class="tags">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <a href="/is-elanlari">Is elanlari 2023 - Vakansiyalar</a>
+                </div>
+                <div class="col-md-8"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tags end -->
+
+</main>
+<!-- Main Section End -->
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+@*    <script>
+        $(document).ready(function () {
+            $(".nsp_search").click(function (event) {
+                event.preventDefault();
+
+                var searchInput = $("#searchinput").val().trim();
+
+                if (searchInput !== "") {
+                    $.ajax({
+                        url: "https://localhost:7066/home/index",
+                        method: "GET",
+                        data: { searchText: searchInput },
+                        success: function (data) {
+                            console.log(data);
+                        },
+                        error: function (xhr, status, error) {
+                            console.error('Error:', error);
+                        }
+                    });
+                } else {
+                    alert("Yanlış giriş.");
+                }
+            });
+        });
+    </script>*@
+    <script>
+        const data1 = document.getElementById("resetpassword");
+        if (data1 != undefined) {
+            const Toast = Swal.mixin({
+                toast: true,
+                position: "top-end",
+                showConfirmButton: false,
+                timer: 4000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.onmouseenter = Swal.stopTimer;
+                    toast.onmouseleave = Swal.resumeTimer;
+                }
+            });
+            Toast.fire({
+                icon: "warning",
+                title: "please check email "
+            });
+        }
+
+        const data2 = document.getElementById("verify");
+        if (data2 != undefined) {
+            const Toast = Swal.mixin({
+                toast: true,
+                position: "top-end",
+                showConfirmButton: false,
+                timer: 4000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.onmouseenter = Swal.stopTimer;
+                    toast.onmouseleave = Swal.resumeTimer;
+                }
+            });
+            Toast.fire({
+                icon: "warning",
+                title: "successfully signup"
+            });
+        }
+        const data3 = document.getElementById("register");
+        if (data3 != undefined) {
+            const Toast = Swal.mixin({
+                toast: true,
+                position: "top-end",
+                showConfirmButton: false,
+                timer: 4000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.onmouseenter = Swal.stopTimer;
+                    toast.onmouseleave = Swal.resumeTimer;
+                }
+            });
+            Toast.fire({
+                icon: "warning",
+                title: "please verify your email "
+            });
+        }
+
+        const data4 = document.getElementById("request");
+        if (data4 != undefined) {
+            const Toast = Swal.mixin({
+                toast: true,
+                position: "top-end",
+                showConfirmButton: false,
+                timer: 4000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.onmouseenter = Swal.stopTimer;
+                    toast.onmouseleave = Swal.resumeTimer;
+                }
+            });
+            Toast.fire({
+                icon: "success",
+                title: "Send Request for this vacancy"
+            });
+        }
+</script>
+    <script src="~/assets/js/home.js"></script>
+                }
+

@@ -1,0 +1,159 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet"
+          href="~/HelloJobPanel/assets/bootstrap-5.3.0-alpha1-dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/HelloJobPanel/assets/css/slick.css" />
+    <link rel="stylesheet" href="~/HelloJobPanel/assets/css/slick.css.map" />
+    <link rel="stylesheet" href="~/HelloJobPanel/assets/css/main.css" />
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css" />
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+          integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+          crossorigin="anonymous"
+          referrerpolicy="no-referrer" />
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link rel="icon shortcut" href="https://www.hellojob.az/content/assets/images/favicon.svg?v=2">
+    <title>Hello Job</title>
+</head>
+<body>
+    <main>
+        <div class="account">
+            <div class="account_bar">
+                <a asp-controller="dashboard" asp-action="index" class="logo" aria-label="hellojob">
+                    <img src="~/HelloJobPanel/assets/images/night_mode_logo.svg" alt="" />
+                </a>
+                <ul class="myprofile">
+                    <li>
+                        <a class="active" asp-controller="Dashboard" asp-action="index">
+                            <span>
+                                <img src="https://www.hellojob.az/content/assets/images/profile/svg-icons/user2.svg"
+                                     alt="" />
+                            </span>
+                            Profilim
+                        </a>
+                    </li>
+                    @if (User.IsInRole("Employee"))
+                    {
+                    <li>
+                        <a asp-controller="resume" asp-action="create">
+                            <span>
+                                <img src="https://www.hellojob.az/content/assets/images/profile/svg-icons/cv.svg"
+                                     alt="" />
+                            </span>
+                            Cv yerləşdir
+                        </a>
+                    </li>
+                        
+                    <li>
+                        <a asp-action="index" asp-controller="resume">
+                            <span>
+                                <img src="https://www.hellojob.az/content/assets/images/profile/svg-icons/megaphone.svg"
+                                     alt="" />
+                            </span>
+                            Elanlarım
+                        </a>
+                    </li>
+                    }
+                    @if (User.IsInRole("Owner"))
+                    {
+                         <li>
+                        <a asp-action="index" asp-controller="vacancy">
+                            <span>
+                                <img src="https://www.hellojob.az/content/assets/images/profile/svg-icons/megaphone.svg"
+                                     alt="" />
+                            </span>
+                            Elanlarım
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-controller="Request" asp-action="Index">
+                            <span>
+                                <img src="https://www.hellojob.az/content/assets/images/profile/svg-icons/heart2.svg"
+                                     alt="" />
+                            </span>
+                            Requests
+                        </a>
+                    </li>
+                    }
+                    <li>
+                        <a asp-action="Update" asp-controller="account">
+                            <span>
+                                <img src="https://www.hellojob.az/content/assets/images/profile/svg-icons/shield.svg"
+                                     alt="" />
+                            </span>
+                            Təhlükəsizlik
+                        </a>
+                    </li>
+
+                    @if (User.IsInRole("Owner"))
+                    {
+                    <li>
+                        <a asp-controller="company" asp-action="create">
+                            <span>
+                                <img src="https://www.hellojob.az/content/assets/images/profile/svg-icons/shield.svg"
+                                     alt="" />
+                            </span>
+                            Şirkət yarat
+                        </a>
+                    </li>
+                    <li>
+                            <a asp-controller="company" asp-action="index">
+                            <span>
+                                <img src="https://www.hellojob.az/content/assets/images/profile/svg-icons/shield.svg"
+                                     alt="" />
+                            </span>
+                            Şirkətlərim
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-controller="vacancy" asp-action="create">
+                            <span>
+                                <img src="https://www.hellojob.az/content/assets/images/profile/svg-icons/shield.svg"
+                                     alt="" />
+                            </span>
+                            Vakansiya Yerləşdir
+                        </a>
+                    </li>
+                    }
+                </ul>
+            </div>
+            <div class="account_content">
+                <div class="account_head">
+                    <div class="account_head_tools">
+                        <a asp-controller="home" asp-action="index" asp-area=""
+                           class="btn btn-site btn-transparent d-none d-md-block">Sayta keçid et</a>
+                        <div class="account_head_user">
+                            <a href="./account.html" class="profile__header__user__name">
+                                <img src="https://www.hellojob.az/content/assets/images/profile/svg-icons/user.svg"
+                                     alt="" />
+                                <span>@User.Identity.Name</span>
+                            </a>
+                            <ul class="account_head_user_drop"> 
+                                <li><a href="./mysticker.html">Mənim elanlarım</a></li>
+                                <li>
+                                    <a href="user/security">Şəxsi məlumatlar</a>
+                                </li>
+                                <li><a asp-controller="account" asp-action="logout">Çıxış</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                @RenderBody()
+            </div>
+        </div>
+    </main>
+    @RenderSection("Scripts", required: false)
+    <script src="~/HelloJobPanel/assets/js/account.js"></script>
+    <script>
+        document.getElementById('homeLink').addEventListener('click', function () {
+            window.location.href = 'https://localhost:7066/home/index';
+        });
+    </script>
+</body>
+</html>

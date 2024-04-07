@@ -1,0 +1,99 @@
+﻿
+@model List<CompanyGetDto>
+@inject IVacancyService vacancyService;
+
+@{
+    IList<VacancyGetDto> vacancies = (await vacancyService.GetAllAsync(ViewBag.UserId,false,1,6)).Datas;
+}
+
+
+<div class="create_cv">
+    <div class="title">
+        <h1>Şirkətlərim</h1>
+        <ul class="profile__add-cv__parts">
+            <li class="active">
+                <a href="#tab1" class="tab1 step_btn"> Şirkətlər()</a>
+            </li>
+        </ul>
+    </div>
+    <div class="inner_tab">
+        <div class="row mt-5">
+            @foreach (var item in Model)
+            {
+                
+            <div class="company_card col-md-4 col-lg-3">
+                <div class="company_box">
+                    <a asp-area="" asp-controller="company" asp-action="detail" asp-route-id="@item.Id" class="full">
+                        <div>
+                            <div class="company_images" style="padding:0px !important; position:static !important;">
+                                <div class="image" style="
+    height: 70px;
+    display: flex;
+    justify-content: center;
+">
+                                    <img src="~/assets/images/Companies/@item.Image" alt="Kapital Bank" />
+                                </div>
+                            </div>
+                            <p>@item.Name</p>
+                                <p>Vakansiya sayı <span>@vacancies.Where(x=>x.Company.Id==item.Id).Count()</span> </p>
+                        </div>
+                    </a>
+                    <div class="crudbtn mt-2">
+                        <a class="btn btn-success" style="text-decoration:none" asp-controller="Company" asp-action="Update" asp-route-id="@item.Id">
+                            Edit
+                        </a>
+                            <a class="btn btn-danger" style="text-decoration:none" asp-controller="Company" asp-action="Remove" asp-route-id="@item.Id">
+                            Delete
+                        </a>
+
+                    </div>
+                </div>
+            </div>
+            }
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js"
+        integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+
+    <script>
+        $(document).ready(function () {
+            if ($("#companySuccess").length) {
+                toastr["success"]("You have successfully joined us!", "Your Company creaiting")
+            }
+            else if ($("#companyError").length) {
+                toastr["error"]("Something went wrong!", "Upsss Sorry")
+            }
+        })
+    </script>
+    <script>
+        $(document).ready(function () {
+            if ($("#editedSuccess").length) {
+                toastr["success"]("You have successfully joined us!", "Your Company is edited")
+            }
+            else if ($("#editedError").length) {
+                toastr["error"]("Something went wrong!", "Upsss Sorry")
+            }
+        })
+    </script>
+    <script>
+        $(document).ready(function () {
+            if ($("#deletedSuccess").length) {
+                toastr["success"]("You have successfully joined us!", "Your Company is deleted")
+            }
+            else if ($("#deletedError").length) {
+                toastr["error"]("Something went wrong!", "Upsss Sorry")
+            }
+        })
+    </script>
+
+
+    <!-- Visual Studio Browser Link -->
+    <script type="text/javascript" src="/_vs/browserLink" async="async" id="__browserLink_initializationData" data-requestId="6666544729e1485d8596d45c57c28ba5" data-requestMappingFromServer="false" data-connectUrl="http://localhost:58989/e2a3a0e7b5f641d591d223e6e9652c5b/browserLink"></script>
+    <!-- End Browser Link -->
+   }

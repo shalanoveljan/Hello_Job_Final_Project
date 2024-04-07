@@ -1,0 +1,39 @@
+@import
+  'abstracts/variables',
+  'abstracts/functions',
+  'abstracts/mixins',
+  'abstracts/placeholders';
+
+@import
+  'base/reset',
+  'base/typography';
+
+@import
+  'layout/header',
+  'layout/footer';
+
+@import
+  'components/buttons',
+  'components/carousel',
+  'components/links',
+  'components/dropdown';
+
+  @import 
+  'library/bootstrap.min.css';
+
+   @import
+   'responsive.scss';
+
+   @import
+   'pages/home.scss',
+   'pages/company.scss',
+   'pages/companydetail',
+   'pages/blog',
+   'pages/blog-detail',
+   'pages/course',
+   'pages/wishlist',
+   'pages/coursedetail',
+   'pages/resume',
+   'pages/resumedetail',
+   'pages/vacancy-detail.scss',
+

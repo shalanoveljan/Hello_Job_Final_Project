@@ -1,0 +1,392 @@
+.breadcrumbs {
+    display: flex;
+}
+
+    .breadcrumbs li {
+        display: flex;
+    }
+
+        .breadcrumbs li:after {
+            content: "/";
+            display: block;
+            margin: 0 5px;
+            font-weight: 500;
+            font-size: 16px;
+            line-height: 20px;
+            color: #A3A6AC;
+        }
+
+        .breadcrumbs li:last-child:after {
+            display: none;
+        }
+
+        .breadcrumbs li a {
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 20px;
+            color: #A3A6AC;
+        }
+
+.vacancy_detail {
+    margin-bottom: 50px;
+}
+
+    .vacancy_detail .resume__block {
+        padding: 16px;
+    }
+
+        .vacancy_detail .resume__block.resume__header {
+            display: flex;
+            align-items: center;
+        }
+
+            .vacancy_detail .resume__block.resume__header .resume__header__img {
+                border: 0;
+                width: 56px;
+                height: 56px;
+                margin-right: 24px;
+                background: white;
+            }
+
+                .vacancy_detail .resume__block.resume__header .resume__header__img img {
+                    height: 100%;
+                    -o-object-fit: cover;
+                    object-fit: cover;
+                    width: 100%;
+                }
+
+            .vacancy_detail .resume__block.resume__header .resume__header__desc h3 {
+                margin-bottom: 10px;
+                line-height: 24px;
+                font-size: 16px;
+                max-width: 300px;
+                font-weight: 500;
+            }
+
+            .vacancy_detail .resume__block.resume__header .resume__header__desc p {
+                font-weight: 400;
+                line-height: 19px;
+                margin-bottom: 0;
+            }
+
+            .vacancy_detail .resume__block.resume__header .vacancies__item__right {
+                display: flex;
+                align-items: center;
+                font-weight: 500;
+                font-size: 14px;
+                line-height: 17px;
+                height: -moz-max-content;
+                height: max-content;
+            }
+
+            .vacancy_detail .resume__block.resume__header .resume__icon {
+                margin: 15px 10px !important;
+            }
+
+        .vacancy_detail .resume__block .resume__title {
+            font-weight: 700;
+            font-size: 17px;
+            line-height: 21px;
+            text-transform: uppercase;
+            color: #2196F3;
+            display: flex;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+            .vacancy_detail .resume__block .resume__title::before {
+                content: "";
+                width: 3px;
+                height: 24px;
+                background-color: #2196F3;
+                display: block;
+                margin-right: 16px;
+                border-radius: 10px;
+            }
+
+        .vacancy_detail .resume__block .row .resume__item {
+            display: flex;
+            margin-bottom: 16px;
+            align-items: flex-start;
+        }
+
+            .vacancy_detail .resume__block .row .resume__item .resume__icon {
+                width: 40px;
+                height: 40px;
+                background: #F4F6F9;
+                border-radius: 8px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin-right: 16px;
+                min-width: 40px;
+                position: unset;
+            }
+
+            .vacancy_detail .resume__block .row .resume__item .resume__item__text h4 {
+                font-weight: 500;
+                font-size: 14px;
+                line-height: 18px;
+                margin-bottom: 4px;
+            }
+
+                .vacancy_detail .resume__block .row .resume__item .resume__item__text h4 a {
+                    color: black;
+                }
+
+            .vacancy_detail .resume__block .row .resume__item .resume__item__text p {
+                font-size: 12px;
+                line-height: 15px;
+            }
+
+        .vacancy_detail .resume__block.work_info ul {
+            padding-left: 20px !important;
+        }
+
+            .vacancy_detail .resume__block.work_info ul li {
+                list-style-type: disc;
+            }
+
+.scrollsection {
+    padding: 2rem 0;
+}
+
+    .scrollsection .scrollsectioncon {
+        width: 98%;
+        margin-left: 0;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-right: 0px;
+    }
+
+        .scrollsection .scrollsectioncon .part1 {
+            display: flex;
+            gap: 15px;
+            width: 90%;
+        }
+
+            .scrollsection .scrollsectioncon .part1 span {
+                background-color: #F4F6F9;
+                color: rgba(33, 41, 68, 0.75);
+                text-align: center;
+                padding: 8px 0;
+                border-radius: 8px;
+                height: 50px;
+                width: 150px;
+            }
+
+            .scrollsection .scrollsectioncon .part1 button {
+                width: 200px;
+                height: 50px;
+                font-weight: 500;
+                font-size: 14px;
+                line-height: 25px;
+                padding: 6.5px 32px;
+                background: #2196F3;
+                border-radius: 6px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: white;
+                font-family: inherit;
+                border: none;
+            }
+
+        .scrollsection .scrollsectioncon .scrollsectioninfo {
+            display: flex;
+            gap: 16px;
+        }
+
+            .scrollsection .scrollsectioncon .scrollsectioninfo .action {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+            }
+
+                .scrollsection .scrollsectioncon .scrollsectioninfo .action p {
+                    font-weight: 500;
+                    font-size: 14px;
+                    line-height: 25px;
+                    margin-bottom: 0;
+                }
+
+.similar__vacancies {
+    margin-top: 20px;
+}
+
+    .similar__vacancies .vacancies__item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 32px;
+        color: #212944;
+        padding: 18px;
+        border: 1px solid #E4E7EC;
+        border-radius: 6px;
+        position: relative;
+        margin-bottom: 26px;
+    }
+
+        .similar__vacancies .vacancies__item .vacancies__item__left {
+            display: flex;
+            align-items: flex-start;
+            gap: 24px;
+        }
+
+            .similar__vacancies .vacancies__item .vacancies__item__left .vacancies__desc {
+                font-weight: 400;
+                font-size: 14px;
+                line-height: 19px;
+            }
+
+        .similar__vacancies .vacancies__item .vacancies__item__right {
+            display: flex;
+            justify-content: space-between;
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 17px;
+            height: 90px;
+        }
+
+            .similar__vacancies .vacancies__item .vacancies__item__right .card_like {
+                position: unset;
+                width: 32px;
+                height: 32px;
+                background: #F4F6F9;
+                border-radius: 6px;
+                margin-left: 28px;
+            }
+
+            .similar__vacancies .vacancies__item .vacancies__item__right .resume__icon {
+                margin-right: 0;
+            }
+
+    .similar__vacancies .resume__title {
+        font-weight: 700;
+        font-size: 17px;
+        line-height: 21px;
+        text-transform: uppercase;
+        color: #2196F3;
+        display: flex;
+        align-items: center;
+        margin-bottom: 16px;
+    }
+
+        .similar__vacancies .resume__title::before {
+            content: "";
+            width: 3px;
+            height: 24px;
+            background-color: #2196F3;
+            display: block;
+            margin-right: 16px;
+            border-radius: 10px;
+        }
+
+.contact .contact__top {
+    border: 1px solid #e2e9f2;
+    border-radius: 8px 8px 0 0;
+    padding: 16px;
+}
+
+.contact .contact__bottom {
+    border-top: 0;
+    border-radius: 0 0 8px 8px;
+}
+
+    .contact .contact__bottom .row {
+        flex-wrap: wrap;
+        margin-right: -15px;
+        margin-left: -15px;
+    }
+
+.contact .contact__btn {
+    display: flex;
+    margin-top: 24px;
+}
+
+    .contact .contact__btn .btn {
+        padding: 10px 12px;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 25px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 8px;
+        color: #FF7F00;
+        width: 100%;
+        border: 1px solid #FF7F00;
+        transition: 0.2s linear;
+        white-space: nowrap;
+    }
+
+        .contact .contact__btn .btn img {
+            margin: 0 15px;
+        }
+
+        .contact .contact__btn .btn.resume__up-btn {
+            border-color: #2196F3;
+            color: #2196F3;
+            margin-left: 32px;
+        }
+
+.dark a, .dark span {
+    color: #fff;
+}
+
+.dark .resume__block {
+    border-color: #003075;
+}
+
+    .dark .resume__block .resume__header__desc h3 {
+        color: #fff;
+    }
+
+    .dark .resume__block li {
+        color: #fff;
+    }
+
+    .dark .resume__block h3, .dark .resume__block p {
+        color: #fff;
+    }
+
+.dark .vacancies__item, .dark .contact__top, .dark .contact .contact__bottom, .dark .card_like, .dark .resume__icon {
+    border: 1px solid #003075;
+}
+
+.dark .swiper a {
+    background-color: #081833;
+    border: 1px solid #003075;
+    color: #fff;
+}
+
+.swiper {
+    width: 100%;
+    height: 60px;
+    display: flex;
+}
+
+    .swiper a {
+        color: #595F73;
+        background: #F4F6F9;
+        border-radius: 6px;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 20px;
+        text-align: center;
+        justify-content: center;
+        padding: 15px 12px;
+        border-radius: 6px;
+        height: 50px;
+    }
+
+.swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    background: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+/*# sourceMappingURL=vacancy-detail.css.map */

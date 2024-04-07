@@ -1,0 +1,128 @@
+﻿@model PagginatedResponse<CourseGetDto>
+
+
+<div class="main-panel">
+    <div class="content-wrapper">
+        <div class="row">
+            <div class="col-lg-12 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Course Table</h4>
+                        <a asp-action="create" class="badge badge-success">Create</a>
+                        <div class="table-responsive">
+                          @*  style="overflow-x: auto;"*@
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Image</th>
+                                        <th>Title</th>
+                                        <th>Agency</th>
+                                        <th>Category</th>
+                                        <th>Tags</th>
+                                        <th>Mode</th>
+                                        <th>Level</th>
+                                        <th>Payment</th>
+                                        <th>Period</th>
+                                        <th>Retirement</th>
+                                        <th>Sertification</th>
+                                        <th>Premium</th>
+                                        <th>Operations</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.Datas)
+                                    {
+                                        
+                                    <tr>
+                                        <td class="py-1">
+                                            <img src="~/assets/images/courses/@item.Image" alt="image">
+                                        </td>
+                                        <td>@item.Title</td>
+                                            <td>@item.Agency </td>
+                                            <td>@item.Category.Name </td>
+                                         <td>
+                                            @foreach (var tag in item.Tags)
+                                            {
+                                                var tagName = (string)tag.GetType().GetProperty("Name").GetValue(tag);
+                                                <span>@tagName </span>
+                                            }
+
+                                        </td>
+                                        <td>@item.Mode</td>
+                                        <td>@item.Level</td>
+                                            <td>
+                                                @if (item.Price is 0)
+                                                {
+                                                    <span>Odenissiz</span>
+                                                }
+                                                else
+                                                {
+                                                    <span>Odenisli(Price:@item.Price)</span>
+                                                }
+                                            </td>
+
+                                            <td>@item.Period ay</td>
+                                            <td>
+                                                @if (@item.IsRetirement)
+                                                {
+                                                    <span>Teqaudlu</span>
+                                                }
+                                                else
+                                                {
+                                                    <span>Teqaudsuz</span>
+                                                }
+                                            </td>
+                                            <td>
+
+                                                @if (@item.IsSertificate)
+                                                {
+                                                    <span>Verilir</span>
+                                                }
+                                                else
+                                                {
+                                                    <span>Verilmir</span>
+                                                }
+                                            </td>
+                                            <td>
+
+                                                @if (@item.IsPremium)
+                                                {
+                                                    <span>Premium</span>
+                                                }
+                                                else
+                                                {
+                                                    <span>Premium deyil</span>
+                                                }
+                                            </td>
+                                        <td><a onclick="return confirm('are you sure?')" asp-action="remove" asp-route-id="@item.Id" class="badge badge-danger">Remove</a> <a asp-action="update" asp-route-id="@item.Id" class="badge badge-warning">Update</a></td>
+                                    </tr>
+                                    }
+                                
+                                </tbody>
+                            </table>
+
+
+                          
+                                <nav aria-label="Page navigation example">
+                                    <ul class="pagination justify-content-center">
+                                        <li class="page-item @(Model.PageNumber == 1 ? "disabled" : null)">
+                                            <a class="page-link" asp-action="Index" asp-route-page="@(Model.PageNumber - 1)" tabindex="-1">Previous</a>
+                                        </li>
+                                        @for (int i = 1; i <= Model.TotalPages; i++)
+                                        {
+                                            <li class="page-item @(i == Model.PageNumber ? "active" : null)">
+                                                <a class="page-link" asp-action="Index" asp-route-page="@i">@i</a>
+                                            </li>
+                                        }
+                                        <li class="page-item @(Model.TotalPages == Model.PageNumber ? "disabled" : null)">
+                                            <a class="page-link" asp-action="Index" asp-route-page="@(Model.PageNumber + 1)">Next</a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+    </div>
+</div>

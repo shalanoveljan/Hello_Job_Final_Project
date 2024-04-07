@@ -1,0 +1,168 @@
+﻿@model PagginatedResponse<ResumeGetDto>
+
+
+<div class="main-panel">
+    <div class="content-wrapper">
+        <div class="row">
+            <div class="col-lg-12 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Resumes Table</h4>
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Image</th>
+                                        <th>UserName</th>
+                                        <th>Name</th>
+                                        <th>Surname</th>
+                                        <th>Email</th>
+                                        <th>Salary</th>
+                                        <th>Category</th>
+                                        <th>City</th>
+                                        <th>Language</th>
+                                        <th>Education</th>
+                                        <th>Experience</th>
+                                        <th>Viewcount</th>
+                                        <th>Job Mode</th>
+                                        <th>Phonenumber</th>
+                                        <th>Gender</th>
+                                        <th>Maritalstatus</th>
+                                        <th>Birthday</th>
+                                        <th>Enddate</th>
+                                        <th>IsPremium</th>
+                                        <th>IsDriverLicense</th>
+                                        <th>Experiences</th>
+                                        <th>Skills</th>
+                                        <th>Educations</th>
+                                        <th>Operations</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.Datas)
+                                    {
+
+                                        <tr>
+                                            <td class="py-1">
+                                                <img src="~/assets/images/resumes/@item.Image" alt="image">
+                                            </td>
+                                            <td>@item.AppUser.UserName</td>
+                                            <td>@item.Name</td>
+                                            <td>@item.Surname </td>
+                                            <td>@item.Email</td>
+                                            <td>@item.Salary AZN</td>
+                                            <td>@item.Category.Name </td>
+                                            <td>@item.City.Name </td>
+                                            <td>@item.Language.Name </td>
+                                            <td>@item.Education.Name </td>
+                                            <td>@item.Experience il</td>
+                                            <td>@item.ViewCount</td>
+                                            <td>@item.Mode</td>
+                                            <td>@item.PhoneNumber</td>
+                                            <td>@item.Gender</td>
+                                            <td>@item.Status</td>
+                                            <td>@item.Birthday.ToString("dd mm yyyy")</td>
+                                            <td>@item.EndDate.ToString("dd mm yyyy")</td>
+                                            <td>
+                                                @if (@item.IsPremium)
+                                                {
+                                                    <span>Premium</span>
+                                                }
+                                                else
+                                                {
+                                                    <span>Premium deyil</span>
+                                                }
+                                            </td>
+                                            <td>
+                                                @if (@item.IsDriverLicense)
+                                                {
+                                                    <span>Lisans var</span>
+                                                }
+                                                else
+                                                {
+                                                    <span>yoxdur</span>
+                                                }
+                                            </td>
+                                            <td>
+                                                @foreach (var exp in item.experiences)
+                                                {
+                                                    <span>Position:@exp.Position </span>
+                                                    <span>Workplace:@exp.Workplace </span>
+                                                    
+                                                }
+                                            </td>
+                                            <td>
+                                                @foreach (var exp in item.Skills)
+                                                {
+                                                    <span>Skill:@exp.Name </span>
+                                                }
+                                            </td>
+                                            <td>
+                                                @foreach (var exp in item.educations)
+                                                {
+                                                    <span>University:@exp.University </span>
+                                                    <span>Degree:@exp.Degree </span>
+                                                }
+                                            </td>
+
+                                            <td>
+                                                @if (item.order == Order.Accept)
+                                                {
+                                                    <form asp-controller="resume" asp-action="Reject" asp-route-resumeid="@item.Id" method="post" onsubmit="return confirm('Are you sure?')">
+                                                        <button style="border:none; margin-bottom:4px" type="submit" class="badge badge-danger">Reject</button>
+                                                    </form>
+                                                    <form asp-controller="resume" asp-action="Pending" asp-route-resumeid="@item.Id" method="post">
+                                                        <button style="border:none; margin-bottom:4px" type="submit" class="badge badge-warning">Pending</button>
+                                                    </form>
+                                                }
+                                                else if (item.order == Order.None)
+                                                {
+                                                    <form asp-controller="resume" asp-action="Accept" asp-route-resumeid="@item.Id" method="post">
+                                                        <button style="border:none; margin-bottom:4px" type="submit" class="badge badge-primary">Accept</button>
+                                                    </form>
+                                                    <form asp-controller="resume" asp-action="Reject" asp-route-resumeid="@item.Id" method="post" onsubmit="return confirm('Are you sure?')">
+                                                        <button style="border:none; margin-bottom:4px" type="submit" class="badge badge-danger">Reject</button>
+                                                    </form>
+                                                }
+                                                else if (item.order == Order.Reject)
+                                                {
+                                                    <form asp-controller="resume" asp-action="Accept" asp-route-resumeid="@item.Id" method="post">
+                                                        <button style="border:none; margin-bottom:4px" type="submit" class="badge badge-primary">Accept</button>
+                                                    </form>
+                                                    <form asp-controller="resume" asp-action="Pending" asp-route-resumeid="@item.Id" method="post">
+                                                        <button style="border:none; margin-bottom:4px" type="submit" class="badge badge-warning">Pending</button>
+                                                    </form>
+                                                }
+                                            </td>
+
+                                        </tr>
+                                    }
+
+                                </tbody>
+                            </table>
+
+
+
+                            <nav aria-label="Page navigation example">
+                                <ul class="pagination justify-content-center">
+                                    <li class="page-item @(Model.PageNumber == 1 ? "disabled" : null)">
+                                        <a class="page-link" asp-action="Index" asp-route-page="@(Model.PageNumber - 1)" tabindex="-1">Previous</a>
+                                    </li>
+                                    @for (int i = 1; i <= Model.TotalPages; i++)
+                                    {
+                                        <li class="page-item @(i == Model.PageNumber ? "active" : null)">
+                                            <a class="page-link" asp-action="Index" asp-route-page="@i">@i</a>
+                                        </li>
+                                    }
+                                    <li class="page-item @(Model.TotalPages == Model.PageNumber ? "disabled" : null)">
+                                        <a class="page-link" asp-action="Index" asp-route-page="@(Model.PageNumber + 1)">Next</a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

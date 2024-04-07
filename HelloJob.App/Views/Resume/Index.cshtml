@@ -1,0 +1,289 @@
+﻿﻿
+
+@model List<ResumeGetDto>
+
+@section Scripts {
+    <script src="~/assets/js/CustomResume.js"></script>
+    <script src="~/assets/js/resume.js"></script>
+   }
+
+<main>
+    <div class="nsp_course">
+        <div class="container">
+            <div class="row ">
+
+                <div class="nsp_top col-md-12">
+                    <ul>
+                        <li>
+                            <a asp-controller="home" asp-action="index">İş elanları</a>
+                        </li>
+                        <li class="active">
+                            <a asp-controller="resume" asp-action="index">CV-lər</a>
+                        </li>
+                        <li>
+                            <a asp-controller="course" asp-action="index">Kurslar</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="resumes__head">
+            <div class="resumes__head__btns--mobile d-md-none mt-2">
+                <a href="#" class="btn btn-sort">
+                    Sırala
+                    <img loading="lazy" src="https://www.hellojob.az/content/assets/images/sort.svg" alt>
+                </a>
+                <a href="#" class="btn btn-filters">
+                    Filtrlə
+                    <img loading="lazy" src="https://www.hellojob.az/content/assets/images/filter.svg" alt>
+                    <span id="filters_count"></span>
+                </a>
+            </div>
+        </div>
+        <div class="resumes__sort d-md-none">
+            <h4>Sırala</h4>
+            <ul>
+                <li>
+                    <input type="radio" class="d-none" value="retire" name="sort" id="sort1" checked>
+                    <label for="sort1">Öncə təqaüdlü proqramlar</label>
+                </li>
+                <li>
+                    <input type="radio" class="d-none" value="time_asc" name="sort" id="sort2">
+                    <label for="sort2">Müddətə görə (az)</label>
+                </li>
+                <li>
+                    <input type="radio" class="d-none" value="time_desc" name="sort" id="sort3">
+                    <label for="sort3">Müddətə görə (çox)</label>
+                </li>
+                <li>
+                    <input type="radio" class="d-none" value="level_asc" name="sort" id="sort4">
+                    <label for="sort4">Səviyyəyə görə (aşağı)</label>
+                </li>
+                <li>
+                    <input type="radio" class="d-none" value="level_desc" name="sort" id="sort5">
+                    <label for="sort5">Səviyyəyə görə (yüksək)</label>
+                </li>
+            </ul>
+        </div>
+        <h3 class="resumes_title">Fİltrlə</h3>
+        <div class="row">
+            <div class="col-md-3 col_1">
+                <div class="resumes__filters" id="resume_filters">
+                    <div class="resumes__filters__head  d-md-none">
+                        <h4>Filterlə</h4>
+                        <a href="#" class="resumes__filters__close">
+                            <img loading="lazy" src="https://www.hellojob.az/content/assets/images/close.svg" alt>
+                        </a>
+                    </div>
+                    <div class="resumes__filters__title mb-4">
+                        <h3 class="resumes_title">Açar sözü</h3>
+                        <div class="selectize-input">
+                            <input type="text" placeholder="Axtar">
+                        </div>
+                    </div>
+                    <div class="resumes__filters__item resumes__filters__item--profession">
+                        <h3 class="resumes__title">İxtİsas</h3>
+                        <ul class="resumes__filters__profession resumes__filters__checkbox">
+                            @foreach (var item in ViewBag.Categories.Datas)
+                            {
+                                @if (item.ParentId != null)
+                                {
+                                    <li>
+                                        <input type="checkbox" value="@item.Id" class="form-control d-none" id="category@(item.Id)"
+                                       name="CategoriesIds">
+                                        <label for="category@(item.Id)">
+                                            @item.Name
+                                        </label>
+                                    </li>
+
+                                }
+                            }
+                        </ul>
+                    </div>
+                    <div class="resumes__filters__item resumes__filters__item--profession">
+                        <h3 class="resumes__title">Is Rejimi</h3>
+                        <div class="form-group">
+                            <input type="text" class="form-control form-group-search" placeholder="Is rejimi">
+                        </div>
+                        <ul class="resumes__filters__profession resumes__filters__checkbox">
+                            @foreach (var mode in Enum.GetValues(typeof(JobMode)))
+                            {
+                                if ((int)mode != 0)
+                                {
+                                    <li>
+                                        <input type="checkbox" value="@((int)mode)" class="form-control d-none" id="@mode"
+                                       name="Mode">
+                                        <label for="@mode">@mode</label>
+                                    </li>
+
+                                }
+                            }
+
+                        </ul>
+                    </div>
+                    <div class="resumes__filters__item resumes__filters__item--profession">
+                        <h3 class="resumes__title">Tehsil</h3>
+                        <div class="form-group">
+                            <input type="text" class="form-control form-group-search" placeholder="Tehsil">
+                        </div>
+                        <ul class="resumes__filters__profession resumes__filters__checkbox">
+                            @foreach (var item in ViewBag.Educations.Datas)
+                            {
+                                <li>
+                                    <input type="checkbox" value="@item.Id" class="form-control d-none" id="education@(item.Id)"
+                                       name="EducationsIds">
+                                    <label for="education@(item.Id)">
+                                        @item.Name
+                                    </label>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                    <!--Staj-->
+                    <div class="resumes_filters_item   ">
+                        <h3 class="resumes__title">Iş stajı</h3>
+
+                        <div class="range-container">
+                            <div class="values">
+                                <span id="range1"> 0</span>
+                                <span>&dash;</span>
+                                <span id="range2"> 6 </span>
+                            </div>
+                            <div class="wrapper">
+
+                                <div class="slider-track"></div>
+                                <input type="range" name="MinExperience" min="0" max="6" value="0" id="slider-1" oninput="slideOne()">
+                                <input type="range" name="MaxExperience" min="0" max="6" value="6" id="slider-2" oninput="slideTwo()">
+                            </div>
+                            <div class="wrapper_info">
+                                <span>1 ildən az</span>
+                                <span>5 ildən çox</span>
+
+                            </div>
+
+
+                        </div>
+
+
+                    </div>
+
+                    <!--Əmək haqqı-->
+                    <div class="resumes_filters_item   ">
+                        <h3 class="resumes__title">Əmək haqqı</h3>
+
+                        <div class="range-container">
+                            <div class="values">
+                                <span id="range3"> 100</span>
+                                <span>&dash;</span>
+                                <span id="range4"> 10000 </span>
+                            </div>
+                            <div class="wrapper">
+
+                                <div class="slider-track slider-track_internship"></div>
+                                <input type="range" name="MinSalary" min="100" max="10000" value="100" id="slider-3" oninput="slide_3()">
+                                <input type="range" name="MaxSalary" min="100" max="10000" value="10000" id="slider-4" oninput="slide_4()">
+                            </div>
+                            <div class="wrapper_info">
+                                <span>100 AZN</span>
+                                <span>10000 AZN-dən çox</span>
+
+                            </div>
+
+
+                        </div>
+
+
+                    </div>
+                    <div class="resumes__filters__item resumes__filters__item--profession">
+                        <h3 class="resumes__title">Cinsiyyet</h3>
+                        <ul class="resumes__filters__checkbox">
+                            @foreach (var gen in Enum.GetValues(typeof(Gender)))
+                            {
+                                if ((int)gen != 0)
+                                {
+                                    <li>
+                                        <input type="checkbox" value="@((int)gen)" class="form-control d-none" id="@gen"
+                                       name="Gender">
+                                        <label for="@gen">@gen</label>
+                                    </li>
+                                }
+                            }
+                        </ul>
+                    </div>
+                    <div class="resumes__filters__item resumes__filters__item--profession">
+                        <h3 class="resumes__title">Medeni hali</h3>
+                        <ul class="resumes__filters__checkbox">
+                            @foreach (var gen in Enum.GetValues(typeof(MaritalStatus)))
+                            {
+                                if ((int)gen != 0)
+                                {
+                                    <li>
+                                        <input type="checkbox" value="@((int)gen)" class="form-control d-none" id="@gen"
+                                       name="Status">
+                                        <label for="@gen">@gen</label>
+                                    </li>
+                                }
+                            }
+                        </ul>
+                    </div>
+                    <div class="resumes__filters__item resumes__filters__item--profession">
+                        <h3 class="resumes__title">Dil bilikleri</h3>
+                        <ul class="resumes__filters__checkbox">
+                            @foreach (var item in ViewBag.Languages.Datas)
+                            {
+                                <li>
+                                    <input type="checkbox" value="@item.Id" class="form-control d-none" id="lan@(item.Id)"
+                                       name="LanguagesIds">
+                                    <label for="lan@(item.Id)">
+                                        @item.Name
+                                    </label>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                    <div class="resumes__filters__item resumes__filters__item--profession">
+                        <h3 class="resumes__title">Suruculuk Vesiqesi</h3>
+                        <ul class="resumes__filters__checkbox">
+                            <li>
+                                <input type="checkbox" value="1" class="form-control d-none" id="certificate_1"
+                                       name="IsDriverLicense">
+                                <label for="certificate_1">Var</label>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="resumes__filters__btns">
+                        <a href="#" class="btn" id="search_filters">Axtar <span id="count_items"></span></a>
+                        <a href="#" class="btn btn-grey" id="clear">Təmizlə</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-9 col_2">
+                <div class="col_2_header">
+                    <div class="part_1 d-md-flex text-center">
+                        <p class="cv_count">Axtarışınıza uyğun <span id="count_items_head"></span> CV tapıldı</p>
+                        <a href="#" id="clear_filters">Filtrləri təmizlə</a>
+                    </div>
+                    <div class="form_group  d-none  mb-0 d-md-flex align-items-center">
+                        <label>Sırala</label>
+                        <select class="form-control" onchange="MyFunction()" id="sort">
+                            <option  value="">Seçin</option>
+                            <option  value="1" class="sortitem">Yenilər</option>
+                            <option  value="2" class="sortitem">Köhnələr</option>
+                            <option  value="3" class="sortitem">Maaşa görə(çox)</option>
+                            <option  value="4" class="sortitem">Maaşa görə(az)</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="similar_resumes" id="similar-resume">
+                    @await Html.PartialAsync("_ResumePartial",Model)
+                </div>
+
+                 <button type="submit" onclick="LoadMore()" id="loadMoreButton" class="page-link-load" page="4">Daha çox göstər</button>
+
+            </div>
+        </div>
+    </div>
+</main>
+

@@ -1,0 +1,46 @@
+﻿@model UpdateDto
+
+
+<div class="security">
+    <div class="title">
+        <h1>Təhlükəsizlik</h1>
+    </div>
+    <div class="security_tab">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="allsecurity">
+                    <form method="post" asp-action="Update" asp-controller="account">
+                        <div class="alert alert-danger" asp-validation-summary="ModelOnly"></div>
+                        <div class="security-inputs">
+                        <label asp-for="UserName">UserName*</label>
+                        <input asp-for="UserName" type="text" id="reg_name"  va lue="" placeholder="Adınızı daxil edin" class="form-control">
+                        <span class="alert alert-text" asp-validation-for="UserName"></span>
+                    </div>
+                        <div class="security-inputs">
+                            <label asp-for="OldPassword">Mövcud Şifrəni Daxil Edin</label>
+                            <input type="password"
+                                   asp-for="OldPassword"
+                                   class="form-control inputs"
+                                   placeholder="********" />
+                            <span class="alert alert-text" asp-validation-for="OldPassword"></span>
+                        </div>
+                        <div class="security-inputs">
+                            <label asp-for="NewPassword">Yeni Şifrə</label>
+                            <input type="password"
+                                   asp-for="NewPassword"
+                                   class="form-control inputs"
+                                   placeholder="********" />
+                            <span class="alert alert-text" asp-validation-for="NewPassword"></span>
+
+                        </div>
+                        <div class="save_button mb-0">
+                            <button class="btn btn-submit submit" type="submit">Şifrəni yeniləmək</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

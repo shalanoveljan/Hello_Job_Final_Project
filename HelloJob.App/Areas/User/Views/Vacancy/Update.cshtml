@@ -1,0 +1,221 @@
+﻿@model VacancyGetDto
+<div class="create_vacans">
+    <div class="title">
+        <h1>Vakansiya Yerləşdir</h1>
+        <ul class="profile__add-vacans__parts">
+            <li class="active">
+                <a href="#tab1" class=" step_btn">İş barədə məlumatlar</a>
+            </li>
+        </ul>
+    </div>
+    <div class="inner_tab">
+        <form enctype="multipart/form-data" method="post" asp-controller="vacancy" asp-action="update">
+            <div class="row mb-5">
+                <div class="col-lg-2">
+                    <h2 class="section_title">İş barədə məlumatlar</h2>
+                </div>
+                <div class="col-lg-10">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="vacans_inputs">
+                                <div class="cv_inputs">
+                                    <label for="">Vezife</label>
+                                    <input type="text"
+                                           asp-for="Position"
+                                           class="form-control inputs"
+                                           placeholder="Positioninizi yazın" />
+                                    <span class="text text-danger" asp-validation-for="Position"></span>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="vacans_inputs">
+                                <label for="">Şirkət adı</label>
+                                <select name="CompanyId" id="" class="form-control cities">
+                                    @foreach (var item in ViewBag.Companies.Datas)
+                                    {
+                                        if (item.Id==Model.Company.Id)
+                                        {
+                                            <option selected value="@item.Id">@item.Name</option>
+                                        }
+                                        else
+                                        {
+                                        <option value="@item.Id">@item.Name</option>
+                                        }
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="vacans_inputs">
+                                <label for="">Kateqoriya</label>
+                                <select name="CategoryId" class="form-control cities">
+                                    @foreach (var category in ((IEnumerable<CategoryGetDto>)ViewBag.Categories.Datas).Where(c => c.ParentId == null))
+                                    {
+                                        <optgroup label="@category.Name">
+                                            @foreach (var subCategory in ((IEnumerable<CategoryGetDto>)ViewBag.Categories.Datas).Where(c => c.ParentId == category.Id))
+                                            {
+                                                if (subCategory.Id == Model.Category.Id)
+                                                    {
+
+                                                    <option selected value="@subCategory.Id">@subCategory.Name</option>
+                                                    }
+                                                    else
+                                                    {
+                                                    <option value="@subCategory.Id">@subCategory.Name</option>
+
+                                                    }
+                                            }
+                                        </optgroup>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="vacans_inputs">
+                                <label for="">Şəhər</label>
+                                <select name="CityId" id="" class="form-control cities">
+                                    @foreach (var item in ViewBag.Cities.Datas)
+                                    {
+                                        @if (item.Id == Model.City.Id)
+                                        {
+                                            <option selected value="@item.Id">@item.Name</option>
+                                        }
+                                        else
+                                        {
+                                        <option value="@item.Id">@item.Name</option>
+                                        }
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="vacans_inputs">
+                                <label for="">İş stajı</label>
+                                <input asp-for="Required_Experience" type="number" class="form-control" id="exampleInputEmail1" placeholder="Experience">
+                                <span class="text text-danger" asp-validation-for="Required_Experience"></span>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="vacans_inputs">
+                                <label for="">İş saatı</label>
+                                <select asp-for="Mode" class="form-control cities">
+                                    @foreach (var mode in Enum.GetValues(typeof(JobMode)))
+                                    {
+                                        if ((int)mode != 0)
+                                        {
+                                            <option value="@mode">@mode</option>
+                                        }
+                                    }
+                                </select>
+                                <span asp-validation-for="Mode" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="vacans_inputs">
+                                <label for="">Son tarix </label>
+                                <input type="date"
+                                       asp-for="EndDate"
+                                       class="form-control inputs"
+                                       placeholder="__/__/____" />
+                                <span class="text text-danger" asp-validation-for="EndDate"></span>
+
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="vacans_inputs">
+                                <label for="">Əmək haqqı AZN</label>
+                                <input type="number"
+                                       max="12000"
+                                       asp-for="Salary"
+                                       class="form-control inputs"
+                                       placeholder="Məs:1500" />
+                                <span class="text text-danger" asp-validation-for="Salary"></span>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="vacans_inputs">
+                                <label for="">Premium</label>
+                                <div class="checkbox">
+                                    <input asp-for="IsPremium" type="checkbox" class="form-check-input mt-0">
+                                    <span>Premium</span>
+                                    <span class="text text-danger" asp-validation-for="IsPremium"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-5">
+                <div class="col-lg-2">
+                    <h2 class="section_title">Conditions</h2>
+                </div>
+                <div class="col-lg-10">
+                    <div class="adding user_add">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div method="post" class="form-group-2" id="form-container">
+                                    @foreach (var item in Model.abouts)
+                                    {
+                                    <div style="width:100%">
+                                            <input style="margin-top:5px;  width:100%;" class="form-control key " type="text" value="@item.Condition" placeholder="Condition" name="Conditions">
+                                        <button style="font-size:20px;padding:5px 10px;margin-right:5px;margin-top:8px;" type="button" class="add-btn1 btn-primary">+</button>
+                                        <button style="font-size:20px;padding:5px 10px;margin-right:5px;margin-top:8px;" type="button" class="remove-btn1 btn-primary">-</button>
+                                    </div>
+                                        
+                                    }
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="submit-button">
+                <button class="btn btn-primary submit">Təsdiq et</button>
+            </div>
+        </form>
+    </div>
+
+    @section Scripts {
+        <script src="~/HelloJobPanel/assets/js/postvacans.js"></script>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                const formContainer = document.getElementById('form-container');
+
+                // Function to add new form group
+                function addFormGroup() {
+                    const formGroup1 = document.createElement('div');
+                    formGroup1.classList.add('form-group-2');
+                    formGroup1.innerHTML = `
+                                                                                <div style="width:100%">
+                                                        <input style="margin-top:5px;  width:100%;" class="form-control key " type="text"  placeholder="Condition" name="Conditions">
+                                                    <button style="font-size:20px;padding:5px 10px;margin-right:5px;margin-top:8px;" type="button" class="add-btn1 btn-primary">+</button>
+                                                    <button style="font-size:20px;padding:5px 10px;margin-right:5px;margin-top:8px;" type="button" class="remove-btn1 btn-primary">-</button>
+                                                </div>
+                                                                        `;
+                    formContainer.appendChild(formGroup1);
+
+                    // Attach event listeners to the buttons in the new form group
+                    const addBtns = document.querySelectorAll('.add-btn1');
+                    const removeBtns = document.querySelectorAll('.remove-btn1');
+                    addBtns.forEach(btn => btn.addEventListener('click', addFormGroup));
+                    removeBtns.forEach(btn => btn.addEventListener('click', removeFormGroup));
+                }
+                // Function to remove form group
+                function removeFormGroup(event) {
+                    const formGroup = event.target.closest('.form-group-2');
+                    if (formGroup !== null && formContainer.children.length > 1) {
+                        formContainer.removeChild(formGroup);
+                    }
+                }
+
+                // Attach event listener to the button in the initial form group
+                const addBtn = document.querySelector('.add-btn1');
+                addBtn.addEventListener('click', addFormGroup);
+                const removeBtn = document.querySelector('.remove-btn1');
+                removeBtn.addEventListener('click', removeFormGroup);
+            });</script>
+    }

@@ -1,0 +1,119 @@
+﻿
+
+@model CompanyGetDto
+
+<div class="create_cv">
+    <div class="title">
+        <h1>Şirkət yarat</h1>
+        <ul class="profile__add-cv__parts">
+            <li class="active">
+                <a href="#tab1" class="tab1 step_btn"> Şirkət məlumatları</a>
+            </li>
+        </ul>
+    </div>
+    <div class="inner_tab">
+        <form enctype="multipart/form-data" method="post" asp-controller="Company" asp-action="Update" asp-route-id="@Model.Id">
+            <div class="alert alert-danger" asp-validation-summary="ModelOnly"></div>
+
+            <input type="hidden" id="AppUserId" name="AppUserId" value="@ViewBag.UserId">
+
+            <div class="row mb-5">
+                <div class="col-lg-2">
+                    <h2 class="section_title">Şirkət məlumatları</h2>
+                </div>
+                <div class="col-lg-10">
+                    <div class="form-group">
+                        <div class="image_input">
+                            <input class="choose"
+                                   type="file"
+                                   name="ImageFile"
+                                   id="fileInput"
+                                   accept="image/*"
+                                   onchange="showPreview(this)" />
+
+                            <img loading="lazy" style="opacity: 1;" src="~/assets/images/companies/@Model.Image" id="profile_img">
+                        </div>
+                        <label for="prof_img" class="upload_image">
+                            <img src="https://www.hellojob.az/content/assets/images/profile/svg-icons/upload2.svg" alt="" />
+                            <span>Şəkil əlavə et</span>
+                            <p>SVG, PNG, JPG or GIF (max. 1000x1000px)</p>
+                        </label>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="cv_inputs">
+                                <label for="">Ad</label>
+                                <input type="text"
+                                       asp-for="Name"
+                                       class="form-control inputs"
+                                       placeholder="Adınız" />
+                                <span class="text text-danger" asp-validation-for="Name"></span>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="cv_inputs">
+                                <label for="">Email</label>
+                                <input type="email"
+                                       asp-for="Email"
+                                       class="form-control inputs"
+                                       placeholder="Email" />
+                                <span class="text text-danger" asp-validation-for="Email"></span>
+
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="cv_inputs">
+                                <label for="">Url link</label>
+                                <input type="text"
+                                       asp-for="WebsiteUrlLink"
+                                       class="form-control inputs"
+                                       placeholder="UrlLink" />
+                                <span class="text text-danger" asp-validation-for="WebsiteUrlLink"></span>
+
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="cv_inputs">
+                                <label for="">About</label>
+                                <input type="text"
+                                       asp-for="About"
+                                       class="form-control inputs"
+                                       placeholder="About" />
+                                <span class="text text-danger" asp-validation-for="About"></span>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="submit-button">
+                <button class="btn btn-primary submit">Təsdiq et</button>
+            </div>
+        </form>
+    </div>
+</div>
+@section Scripts {
+    <script src="~/HelloJobPanel/assets/js/createcompany.js"></script>
+    <script>
+        function showPreview(input) {
+            const file = input.files[0];
+            const profileImg = document.getElementById('profile_img');
+
+            if (file && file.type.startsWith('image/')) {
+                const reader = new FileReader();
+
+                reader.onload = function (e) {
+                    profileImg.src = e.target.result;
+                    profileImg.style.opacity = '1';
+                }
+
+                reader.readAsDataURL(file);
+            } else {
+                profileImg.src = '';
+                profileImg.style.opacity = '0';
+            }
+
+        }
+    </script>
+   }

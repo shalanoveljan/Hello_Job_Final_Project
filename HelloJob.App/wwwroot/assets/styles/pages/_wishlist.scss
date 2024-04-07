@@ -1,0 +1,62 @@
+
+.vacancies{
+    padding: 40px 0;
+}
+
+#vacancy.active {
+    display: block;
+}
+#vacancy {
+    padding: 26px 0 0;
+    margin: 0;
+    background-color: white;
+    border-radius: 0 0 8px 8px;
+}
+
+.wihlist_new .container {
+    padding: 0 15px;
+}
+#vacancy .wishtitle.active {
+    color: #1f9dff ;
+    font-weight: 500;
+}
+#vacancy a:hover {
+    color: #1f9dff !important;
+    transition: .2s ease;
+}
+#vacancy .wishtitle{
+    color: #061e40 ;
+    display: flex;
+    align-items: center;
+    font-size: 19px;
+    font-family: 'Helvetica Neue';
+}
+#vacancy a span {
+    color: #1f9dff;
+    border-radius: 100%;
+    font-size: 12px;
+    background-color: #f3f6f9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 10px;
+    flex: none;
+    width: 22px;
+    height: 22px;
+}
+
+.show_all {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 25px;
+}
+.show_all a {
+    color: #1f9dff;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: .2s ease;
+    border-radius: 6px;
+}
+

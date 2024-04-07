@@ -1,0 +1,83 @@
+﻿
+@model List<ResumeGetDto>
+@inject ILikedService likedService;
+
+@{
+    WishlistGetDto wishlist = await likedService.GetWishList();
+}
+@{
+
+    //var premiumItems = Model.Where(item => item.IsPremium).ToList();
+    //var nonPremiumItems = Model.Where(item => !item.IsPremium).ToList();checkSort ? Model : premiumItems.Concat(nonPremiumItems)
+    //bool checkSort = false;
+    //if (ViewBag.Dto != null)
+    //{
+    //    checkSort = ViewBag.Dto.IsSort;
+    //}
+}
+<input type="text" value="@Model.Count" id="ResumeCount" hidden/>
+@foreach (var item in Model.Take(3).ToList() )
+{
+    <div class="resume">
+        <a asp-action="Detail" asp-route-id="@item.Id" target="_blank">
+            <div class="resume_header">
+                <div class="info">
+                    <div class="resume_header_img">
+                        <img loading="lazy" src="~/assets/images/resumes/@item.Image" alt="" class="">
+                    </div>
+                    <div class="resume_header_desc">
+                        <h3>@item.Category.Name</h3>
+                        <p>@item.Name  @item.Surname </p>
+                    </div>
+                </div>
+                  
+                    <span class="resume__icon mr-0 course_like" id="likes" data-id="@item.Id">
+                        @if (wishlist.wishlistItems.Any(x => x.Id == item.Id && x.IsLiked))
+                        {
+                            <i id="like" style="color: #2196f3;" class="fa-solid fa-heart"></i>
+                        }
+                        else
+                        {
+                            <i id="like"  style="color: #2196f3;" class="fa-regular fa-heart"></i>
+                        }
+                    </span>
+            </div>
+            <div class="resume_footer">
+                <div class="resume_item">
+                    <div class="image">
+                        <img loading="lazy" src="https://www.hellojob.az/content/assets/images/resume/svg-icons/user-clock.svg" alt="">
+                    </div>
+                    <div class="resume_item_text">
+                        <h4>@item.Mode</h4>
+                        <p>İş rejimi</p>
+                    </div>
+                </div>
+                <div class="resume_item">
+                    <div class="image">
+                        <img loading="lazy" src="https://www.hellojob.az/content/assets/images/resume/svg-icons/money.svg" alt="">
+                    </div>
+                    <div class="resume_item_text">
+                        <h4>@item.Salary</h4>
+                        <p>Minimum əmək haqqı AZN</p>
+                    </div>
+                </div>
+                <div class="resume_item">
+                    <div class="image">
+                        <img loading="lazy" src="https://www.hellojob.az/content/assets/images/resume/svg-icons/briefcase.svg" alt="">
+                    </div>
+                    <div class="resume_item_text">
+                        <h4>@item.Experience il</h4>
+                        <p>İş staji</p>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+}
+
+
+
+
+
+
+
