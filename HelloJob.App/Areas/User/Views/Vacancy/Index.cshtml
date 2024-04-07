@@ -3,7 +3,7 @@
 @inject ICategoryService categoryService;
 
 @{
-    List<CategoryGetDto> categories = (await categoryService.GetAllAsync()).Datas.ToList();
+    List<CategoryGetDto> categories = (await categoryService.GetAllAsync(1,30)).Datas.ToList();
 }
 <div class="create_cv">
     <div class="title">

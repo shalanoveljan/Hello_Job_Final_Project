@@ -38,7 +38,7 @@ namespace HelloJob.App.Areas.User.Controllers
             var userId = HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
             ViewBag.Companies = await  _companyService.GetAllAsync(userId,false,1,6);
             ViewBag.UserId = userId;
-            ViewBag.Categories = await _categoryService.GetAllAsync();
+            ViewBag.Categories = await _categoryService.GetAllAsync(1,30);
             ViewBag.Cities = await _cityService.GetAllAsync();
             return View();
         }
@@ -51,7 +51,7 @@ namespace HelloJob.App.Areas.User.Controllers
         {
             if (!ModelState.IsValid)
             {
-                ViewBag.Categories = await _categoryService.GetAllAsync();
+                ViewBag.Categories = await _categoryService.GetAllAsync(1,30);
                 ViewBag.Cities = await _cityService.GetAllAsync();
                 var userId = HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
                 ViewBag.Companies = await _companyService.GetAllAsync(userId, false, 1, 6);
@@ -63,7 +63,7 @@ namespace HelloJob.App.Areas.User.Controllers
 
             if (!response.Success)
             {
-                ViewBag.Categories = await _categoryService.GetAllAsync();
+                ViewBag.Categories = await _categoryService.GetAllAsync(1,30);
                 ViewBag.Cities = await _cityService.GetAllAsync();
                 var userId = HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
                 ViewBag.Companies = await _companyService.GetAllAsync(userId, false, 1, 6);
@@ -77,7 +77,7 @@ namespace HelloJob.App.Areas.User.Controllers
 
         public async Task<IActionResult> Update(int id)
         {
-            ViewBag.Categories = await _categoryService.GetAllAsync();
+            ViewBag.Categories = await _categoryService.GetAllAsync(1, 30);
             ViewBag.Cities = await _cityService.GetAllAsync();
 
             var userId = HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -95,7 +95,7 @@ namespace HelloJob.App.Areas.User.Controllers
         {
             if (!ModelState.IsValid)
             {
-                ViewBag.Categories = await _categoryService.GetAllAsync();
+                ViewBag.Categories = await _categoryService.GetAllAsync(1, 30);
                 ViewBag.Cities = await _cityService.GetAllAsync();
                 var userId = HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
                 ViewBag.Companies = await _companyService.GetAllAsync(userId, false, 1, 6);
@@ -107,7 +107,7 @@ namespace HelloJob.App.Areas.User.Controllers
 
             if (!response.Success)
             {
-                ViewBag.Categories = await _categoryService.GetAllAsync();
+                ViewBag.Categories = await _categoryService.GetAllAsync(1, 30);
                 ViewBag.Cities = await _cityService.GetAllAsync();
 
                 ModelState.AddModelError("", response.Message);

@@ -15888,6 +15888,22 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\assets\images\blogs\a77a8351-4514-4f22-89ea-f7802a4f8f45blog-6.jpg))</OriginalItemSpec>
     </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\assets\images\blogs\b55d4a74-bdb5-47db-a0a9-3fa080c368betecrube.svg))">
+      <SourceType>Package</SourceType>
+      <SourceId>HelloJob.App</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/HelloJob.App</BasePath>
+      <RelativePath>assets/images/blogs/b55d4a74-bdb5-47db-a0a9-3fa080c368betecrube.svg</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\assets\images\blogs\b55d4a74-bdb5-47db-a0a9-3fa080c368betecrube.svg))</OriginalItemSpec>
+    </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\assets\images\blogs\bbc91683-a209-4dae-8cbb-3eab9fbf8bdcblog-9.jpg))">
       <SourceType>Package</SourceType>
       <SourceId>HelloJob.App</SourceId>
@@ -16847,6 +16863,22 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\assets\images\companies\5d6b10c1-4a4f-40fa-ba34-5297939975a5Ferrum_Capital_QSC.jpg))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\assets\images\companies\60be3883-119c-43f7-ba0b-073d8e0dae3fDivAcademy.png))">
+      <SourceType>Package</SourceType>
+      <SourceId>HelloJob.App</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/HelloJob.App</BasePath>
+      <RelativePath>assets/images/companies/60be3883-119c-43f7-ba0b-073d8e0dae3fDivAcademy.png</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\assets\images\companies\60be3883-119c-43f7-ba0b-073d8e0dae3fDivAcademy.png))</OriginalItemSpec>
     </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\assets\images\companies\9c113442-18da-46b8-a98b-01eb76ebfd95Xalqbank.png))">
       <SourceType>Package</SourceType>

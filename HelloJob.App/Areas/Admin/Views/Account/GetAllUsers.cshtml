@@ -75,16 +75,16 @@
                             <nav aria-label="Page navigation example">
                                 <ul class="pagination justify-content-center">
                                     <li class="page-item @(Model.PageNumber == 1 ? "disabled" : null)">
-                                        <a class="page-link" asp-action="Index" asp-route-page="@(Model.PageNumber - 1)" tabindex="-1">Previous</a>
+                                        <a class="page-link" asp-action="GetAllUsers" asp-route-page="@(Model.PageNumber - 1)" tabindex="-1">Previous</a>
                                     </li>
                                     @for (int i = 1; i <= Model.TotalPages; i++)
                                     {
                                         <li class="page-item @(i == Model.PageNumber ? "active" : null)">
-                                            <a class="page-link" asp-action="Index" asp-route-page="@i">@i</a>
+                                            <a class="page-link" asp-action="GetAllUsers" asp-route-page="@i">@i</a>
                                         </li>
                                     }
                                     <li class="page-item @(Model.TotalPages == Model.PageNumber ? "disabled" : null)">
-                                        <a class="page-link" asp-action="Index" asp-route-page="@(Model.PageNumber + 1)">Next</a>
+                                        <a class="page-link" asp-action="GetAllUsers" asp-route-page="@(Model.PageNumber + 1)">Next</a>
                                     </li>
                                 </ul>
                             </nav>

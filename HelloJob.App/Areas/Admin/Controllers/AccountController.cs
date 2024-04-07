@@ -74,7 +74,6 @@ namespace HelloJob.App.Areas.Admin.Controllers
             var res = await _accountService.GetAllUsers(page, count);
             return View(res);
         }
-        //[Authorize(Roles = "SuperAdmin,Admin")]
 
         public async Task<IActionResult> VerifyEmail(string token, string email)
         {
